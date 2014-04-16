@@ -16,7 +16,7 @@ var BasicGame;
   var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
-      _super.call(this, 1024, 576, Phase.AUTO, 'game', null, false, false);
+      _super.call(this, 1024, 576, Phaser.AUTO, 'game', null, false, false);
 
       this.state.add("Boot", BasicGame.Boot);
       this.state.add("Preloader", BasicGame.Preloader);
