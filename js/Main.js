@@ -6,10 +6,10 @@ var __extends = this.__extends || function (d, b) {
 };
 
 window.onload = function() {
-    game = new BasicGame.Main();
+    var game = new BasicGame.Main();
+    game.state.start("Boot");
 }
 
-var game;
 var BasicGame;
 
 (function (BasicGame) {
@@ -21,8 +21,6 @@ var BasicGame;
       this.state.add("Boot", BasicGame.Boot);
       this.state.add("Preloader", BasicGame.Preloader);
       this.state.add("MainMenu", BasicGame.MainMenu);
-
-      this.state.start("Boot");
     }
     
     return Main;
