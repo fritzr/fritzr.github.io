@@ -5,7 +5,13 @@ var __extends = this.__extends || function (d, b) {
   d.prototype = new __();
 };
 
+var game;
 var BasicGame;
+
+window.onload = function() {
+    game = new BasicGame.Main();
+}
+
 
 (function (BasicGame) {
   var Main = (function (_super) {
