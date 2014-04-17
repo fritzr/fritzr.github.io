@@ -17,10 +17,11 @@ var BasicGame;
     MainMenu.prototype.create = function () {
         console.log('Main menu');
         this.background = this.add.image(0,0, 'menu_bg');
+        this.music = this.add.audio('title_music');
     };
 
     MainMenu.prototype.update = function() {
-
+      this.music.play();
     };
 
     MainMenu.prototype.startGame = function () {

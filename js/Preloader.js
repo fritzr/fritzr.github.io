@@ -26,8 +26,8 @@ var timer;
 
         // load remaining game assets
         this.load.image("menu_bg", "assets/img/Background.jpg");
-        /*this.load.audio("music_title", "assets/sound/title.mp3");
-        this.load.audio("music_bg", "assets/sound/music.mp3");*/
+        this.load.audio("music_title", "assets/sound/title.mp3");
+        //this.load.audio("music_bg", "assets/sound/music.mp3");
 
         // load main menu when done
         this.load.onLoadComplete.add(function() {
