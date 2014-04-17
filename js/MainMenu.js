@@ -15,6 +15,7 @@ var BasicGame;
     }
 
     MainMenu.prototype.create = function () {
+        console.log('Main menu');
         this.background = this.add.image(0,0, 'menu_bg');
     };
 

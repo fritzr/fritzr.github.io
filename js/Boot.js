@@ -20,6 +20,7 @@ var BasicGame;
     };
     
     Boot.prototype.create = function () {
+        console.log('Booting...');
       this.game.input.maxPointers = 1;
       this.game.stage.disableVisibilityChange = true;
       if (this.game.device.desktop) {
@@ -34,7 +35,7 @@ var BasicGame;
         this.game.stage.scale.pageAlignHorizontally = true;
         this.game.stage.scale.setScreenSize(true);
       }*/
-      this.game.state.start("Preloader");
+      this.game.state.start("Preloader", true, false);
     };
     
     return Boot;

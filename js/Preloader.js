@@ -16,6 +16,7 @@ var timer;
     }
     
     Preloader.prototype.preload = function () {
+        console.log('preloading...');
         // show preload assets
         this.background = this.add.image(0, 0, "load_bg");
         this.preloadBar = this.add.sprite(this.game.width/2,
@@ -25,14 +26,14 @@ var timer;
 
         // load remaining game assets
         this.load.image("menu_bg", "assets/img/Background.jpg");
-        this.load.audio("music_title", "assets/sound/title.mp3");
-        this.load.audio("music_bg", "assets/sound/music.mp3");
-    };
+        /*this.load.audio("music_title", "assets/sound/title.mp3");
+        this.load.audio("music_bg", "assets/sound/music.mp3");*/
 
-    Preloader.prototype.update = function () {
-      /*if (this.cache.isSoundDecoded("music_bg")) {
-        this.game.state.start("MainMenu");
-      }*/
+        // load main menu when done
+        this.load.onLoadComplete.add(function() {
+            this.game.state.start('MainMenu', true, false);
+        }, this);
+
     };
     
     return Preloader;
