@@ -6,7 +6,6 @@ var __extends = this.__extends || function (d, b) {
 };
 
 var BasicGame;
-var timer;
 
 (function (BasicGame) {
   var Preloader = (function (_super) {
@@ -16,24 +15,31 @@ var timer;
     }
     
     Preloader.prototype.preload = function () {
-        console.log('preloading...');
+        console.log('Preloading...');
         // show preload assets
         this.background = this.add.image(0, 0, "load_bg");
         this.preloadBar = this.add.sprite(this.game.width/2,
-          (2*this.game.height)/3, "load_bar");
+          this.game.height/2, "load_bar");
         this.preloadBar.anchor.setTo(0.5, 0.5);
         this.load.setPreloadSprite(this.preloadBar);
 
         // load remaining game assets
         this.load.image("menu_bg", "assets/img/Background.jpg");
         this.load.audio("music_title", "assets/sound/title.mp3");
-        //this.load.audio("music_bg", "assets/sound/music.mp3");
-
-        // load main menu when done
-        this.load.onLoadComplete.add(function() {
-            this.game.state.start('MainMenu', true, false);
-        }, this);
-
+        this.load.image("continue_button", "assets/img/Buttons/Continue.png");
+        this.load.image("controls_button", "assets/img/Buttons/Controls.png");
+        this.load.image("credits_button", "assets/img/Buttons/Credits.png");
+        this.load.image("newgame_button", "assets/img/Buttons/NewGame.png");
+        this.load.image("upgrades_button", "assets/img/Buttons/Upgrades.png");
+        this.load.image("player_ship", "assets/img/playership.png");
+        this.load.image("enemy_ship", "assets/img/enemyship.png");
+    };
+    
+    Preloader.prototype.update = function () {
+      // load main menu when done
+      if(this.cache.isSoundDecoded("music_title")){
+        this.game.state.start("MainMenu");
+      }
     };
     
     return Preloader;
