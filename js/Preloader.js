@@ -26,13 +26,13 @@ var BasicGame;
         // load remaining game assets
         this.load.image("menu_bg", "assets/img/Background.jpg");
         this.load.audio("music_title", "assets/sound/title.mp3");
-        this.load.image("continue_button", "assets/img/Buttons/Continue.png");
-        this.load.image("controls_button", "assets/img/Buttons/Controls.png");
-        this.load.image("credits_button", "assets/img/Buttons/Credits.png");
-        this.load.image("newgame_button", "assets/img/Buttons/NewGame.png");
-        this.load.image("upgrades_button", "assets/img/Buttons/Upgrades.png");
-        this.load.image("player_ship", "assets/img/playership.png");
-        this.load.image("enemy_ship", "assets/img/enemyship.png");
+        this.load.spritesheet("continue_button", "assets/img/Buttons/Continue.png", 200, 55);
+        this.load.spritesheet("controls_button", "assets/img/Buttons/Controls.png", 200, 55);
+        this.load.spritesheet("credits_button", "assets/img/Buttons/Credits.png", 200, 55);
+        this.load.spritesheet("newgame_button", "assets/img/Buttons/NewGame.png", 200, 55);
+        this.load.spritesheet("upgrades_button", "assets/img/Buttons/Upgrades.png", 255, 55);
+        this.load.spritesheet("player_ship", "assets/img/playership.png");
+        this.load.spritesheet("enemy_ship", "assets/img/enemyship.png");
     };
     
     Preloader.prototype.update = function () {

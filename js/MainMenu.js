@@ -17,13 +17,14 @@ var BasicGame;
     MainMenu.prototype.create = function () {
         console.log('Main menu');
         this.music = this.add.audio('music_title');
-        //this.music.play();
+        this.music.play();
         this.background = this.add.image(0,0, 'menu_bg');
-        this.continuebutton = this.add.sprite(100,100, 'continue_button');
-        this.controlsbutton = this.add.sprite(100,155, 'controls_button');
-        this.controlsbutton = this.add.sprite(100,210, 'credits_button');
-        this.newgamebutton = this.add.sprite(100,265, 'newgame_button');
-        this.upgradesbutton = this.add.sprite(100,320, 'upgrades_button');
+        this.continuebutton = this.add.button(100,100, 'continue_button', this.actionOnClick, this, 1,0,1);
+        this.controlsbutton = this.add.button(100,155, 'controls_button', this.actionOnClick, this, 1,0,1);
+        this.controlsbutton = this.add.button(100,210, 'credits_button', this.actionOnClick, this, 1,0,1);
+        this.newgamebutton = this.add.button(100,265, 'newgame_button', this.actionOnClick, this, 1,0,1);
+        this.upgradesbutton = this.add.button(100,320, 'upgrades_button', this.actionOnClick, this, 1,0,1);
+        var i = 0;
     };
 
     MainMenu.prototype.update = function() {
@@ -32,7 +33,15 @@ var BasicGame;
 
     MainMenu.prototype.startGame = function () {
     };
-      
+    
+    MainMenu.prototype.actionOnClick = function () {
+      if(this.music.isPlaying){
+        this.music.stop();
+      }else{
+        this.music.play();
+      }
+    }
+        
     return MainMenu;
 
     })(Phaser.State);
