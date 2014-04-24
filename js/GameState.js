@@ -8,6 +8,78 @@ var __extends = this.__extends || function (d, b) {
 var BasicGame;
 
 (function (BasicGame) {
+  var Enemy = (function (_super) {
+      __extends(Enemy, _super);
+
+      // starting locations of enemies TODO: load from JSON for each level
+      Enemy.LOCATIONS = [
+          [250,16],  [715,816], [780,656], [625,144],
+          [975,665], [365,80],  [190,432], [420,958],
+          [670,890], [465,960]
+      ];
+
+      // how close to player enemy has to be to target the player
+      Enemy.ACQUIRE_DISTANCE = 100;
+
+      function Enemy(game, x, y, index, player, bullets) {
+          _super.call(this, game, x, y, 'enemy_ship');
+
+          this.player = player;
+          this.bullets = bullets;
+          this.fireRate = 1000;
+          this.nextFire = 0;
+          this.alive = true;
+
+          game.add.existing(this);
+          this.ship.body.setRectangle(31, 31, 2, 9);
+          this.ship.anchor.setTo(0.5, 0.5);
+
+          this.ship.name = index.toString();
+          this.ship.body.immovable = false;
+          this.ship.body.collideWorldBounds = true;
+          this.ship.angle = game.rnd.angle();
+
+          this.game.physics.velocityFromRotation(
+                  this.ship.rotation, 100, this.ship.body.velocity);
+      }
+
+      Enemy.prototype.update = function() {
+        if(!this.ship.alive){
+            return;
+        }
+        if (this.game.physics.arcade.distanceBetween(this.ship,this.player)
+                < ACQUIRE_DISTANCE)
+        {
+          this.ship.rotation = game.physics.angleBetween(this.ship, player);
+          if (this.game.time.now > this.nextFire){
+            bullet = this.bullets.getFirstExists(false);
+            if (bullet){
+              pew4 = game.add.audio('pew4');
+              pew4.play();
+              bullet.reset(this.ship.x, this.ship.y );
+              bullet.body.velocity.y = -400;
+              this.nextFire = game.time.now + 1000;
+
+              bullet.rotation = game.physics.arcade.moveToObject(
+                      bullet, this.player, 300);
+            }   
+          }
+        }
+        
+        if(this.ship.body.blocked.left 
+                || this.ship.body.blocked.right 
+                || this.ship.body.blocked.up 
+                || this.ship.body.blocked.down){
+          this.ship.angle = game.rnd.angle();
+          game.physics.arcade.velocityFromRotation(
+                  this.ship.rotation, 100, this.ship.body.velocity);
+        }
+    };
+
+      return Enemy;
+  })(Phaser.Sprite);
+  BasicGame.Enemy = Enemy;
+
   var GameState = (function (_super) {
     __extends(GameState, _super);
     function GameState() {
@@ -23,29 +95,6 @@ var BasicGame;
     var enemies = [];
     var bulletTime = 0;
     var stateText;
-    
-    GameState.prototype.enemy = function(index,game,player,bullets){
-      var x = [250, 715, 780, 625, 975, 365, 190, 420, 670, 465];
-      var y = [16, 816, 656, 144, 665, 80, 432, 958, 890, 960];
-
-      this.game = game;
-      this.player = player;
-      this.bullets = bullets;
-      this.fireRate = 1000;
-      this.nextFire = 0;
-      this.alive = true;
-
-      this.ship = game.add.sprite(x[index], y[index], 'enemyship');
-      this.ship.body.setRectangle(31, 31, 2, 9);
-      this.ship.anchor.setTo(0.5, 0.5);
-
-      this.ship.name = index.toString();
-      this.ship.body.immovable = false;
-      this.ship.body.collideWorldBounds = true;
-      this.ship.angle = game.rnd.angle();
-
-      this.game.physics.velocityFromRotation(this.ship.rotation, 100, this.ship.body.velocity);
-    };
     
     GameState.prototype.create = function () 
     {
@@ -64,14 +113,11 @@ var BasicGame;
 
           this.layer.resizeWorld();
 
-          this.game.physics.setBoundsToWorld();
-
 
           this.player = this.game.add.sprite(3, 180, 'playership');
-          this.game.physics.enable(this.player, Phaser.Physics.Arcade);
-          Phaser.Physics.Arcade.Body(this.player);
+          this.game.physics.arcade.enableBody(this.player);
           this.player.body.collideWorldBounds = true;
-          this.player.body.setRectangle(27, 27, 2, 9);
+          this.player.body.setSize(27, 27, 2, 9);
           this.player.anchor.setTo( 0.5, 0.5 );
           
           bullets = this.game.add.group();
@@ -87,8 +133,11 @@ var BasicGame;
           enemyBullets.setAll('outOfBoundsKill', true);
           
           enemies = [];
-          for (var i = 0; i < 10; i++){
-            enemies.push(new enemy(i, game, player, enemyBullets));
+          for (var i = 0; i < BasicGame.Enemy.LOCATIONS.length; i++){
+            enemies.push(new BasicGame.Enemy(game, 
+                        BasicGame.Enemy.LOCATIONS[i][0], // x
+                        BasicGame.Enemy.LOCATIONS[i][1], // y
+                        player, enemyBullets));
           }
 
           this.game.camera.follow(player);
@@ -196,35 +245,10 @@ var BasicGame;
         create();
     };
 
-
-
-    GameState.prototype.enemy.prototype.update = function()
-    {
-        if(this.ship.alive){
-        if (this.game.physics.distanceBetween(this.ship, this.player) < 100){
-          this.ship.rotation = game.physics.angleBetween(this.ship, player);
-          if (this.game.time.now > this.nextFire){
-            bullet = this.bullets.getFirstExists(false);
-            if (bullet){
-              pew4 = game.add.audio('pew4');
-              pew4.play();
-              bullet.reset(this.ship.x, this.ship.y );
-              bullet.body.velocity.y = -400;
-              this.nextFire = game.time.now + 1000;
-
-              bullet.rotation = game.physics.moveToObject(bullet, this.player, 300);
-            }   
-          }
-        }
-        
-        if(this.ship.body.blocked.left || this.ship.body.blocked.right || this.ship.body.blocked.up || this.ship.body.blocked.down){
-          this.ship.angle = game.rnd.angle();
-          game.physics.velocityFromRotation(this.ship.rotation, 100, this.ship.body.velocity);
-        }
-      }
-    };
-
     return GameState;
   })(Phaser.State);
   BasicGame.GameState = GameState;
+
+
+
 })(BasicGame || (BasicGame = {}));
