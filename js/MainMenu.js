@@ -16,8 +16,8 @@ var BasicGame;
 
     MainMenu.prototype.create = function () {
         console.log('Main menu');
-        this.music = this.add.audio('music_title');
-        this.music.play();
+        //this.music = this.add.audio('music_title');
+        //this.music.play();
         this.background = this.add.image(0,0, 'menu_bg');
         this.continuebutton = this.add.button(100,100, 'continue_button', this.startGame, this, 1,0,1);
         this.controlsbutton = this.add.button(100,155, 'controls_button', this.actionOnClick, this, 1,0,1);
@@ -32,16 +32,16 @@ var BasicGame;
     };
     
     MainMenu.prototype.startGame = function () {
-      this.music.stop();
+      //this.music.stop();
       this.game.state.start("GameState");
     };
     
     MainMenu.prototype.actionOnClick = function () {
-      if(this.music.isPlaying){
-        this.music.stop();
-      }else{
-        this.music.play();
-      }
+      //if(this.music.isPlaying){
+      //  this.music.stop();
+      //}else{
+      //  this.music.play();
+      //}
     };
         
     return MainMenu;
