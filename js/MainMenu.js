@@ -19,7 +19,7 @@ var BasicGame;
         this.music = this.add.audio('music_title');
         this.music.play();
         this.background = this.add.image(0,0, 'menu_bg');
-        this.continuebutton = this.add.button(100,100, 'continue_button', this.actionOnClick, this, 1,0,1);
+        this.continuebutton = this.add.button(100,100, 'continue_button', this.startGame, this, 1,0,1);
         this.controlsbutton = this.add.button(100,155, 'controls_button', this.actionOnClick, this, 1,0,1);
         this.controlsbutton = this.add.button(100,210, 'credits_button', this.actionOnClick, this, 1,0,1);
         this.newgamebutton = this.add.button(100,265, 'newgame_button', this.actionOnClick, this, 1,0,1);
@@ -30,8 +30,10 @@ var BasicGame;
     MainMenu.prototype.update = function() {
 
     };
-
+    
     MainMenu.prototype.startGame = function () {
+      this.music.stop();
+      this.game.state.start("GameState");
     };
     
     MainMenu.prototype.actionOnClick = function () {
@@ -40,7 +42,7 @@ var BasicGame;
       }else{
         this.music.play();
       }
-    }
+    };
         
     return MainMenu;
 
