@@ -89,7 +89,7 @@ var BasicGame;
 		this.game.physics.startSystem(Phaser.Physics.ARCADE)
           this.game.stage.backgroundColor = '#000000';
 
-          this.bg = this.game.add.tileSprite(0, 0, 300, 300, 'background');
+          this.bg = this.game.add.tileSprite(0, 0, 1280, 800, 'level1bg');
           this.bg.fixedToCamera = true;
 
           this.map = this.game.add.tilemap('level1');
@@ -152,7 +152,7 @@ var BasicGame;
             this.player.body.y = 180;
           }
           
-          this.bg.tilePosition.y -= 6;
+          //this.bg.tilePosition.y -= 6;
          
           this.player.rotation = this.game.physics.arcade.accelerateToPointer( this.player, this.game.input.activePointer, 200, 200, 200 );
 
