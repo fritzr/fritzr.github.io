@@ -177,7 +177,7 @@ var BasicGame;
 
     GameState.prototype.collider = function ()
     {
-      this.game.physics.arcade.collide(this.player, layer);
+      this.game.physics.arcade.collide(this.player, this.layer);
     };
 
     GameState.prototype.fireBullet = function ()
