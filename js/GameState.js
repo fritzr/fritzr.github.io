@@ -171,8 +171,8 @@ var BasicGame;
             }
           }
           
-          this.game.physics.arcade.overlap(enemyBullets, layer, this.bulletHitLayer, null, this);
-          this.game.physics.arcade.overlap(bullets, layer, this.bulletHitLayer, null, this); 
+          this.game.physics.arcade.overlap(enemyBullets, this.layer, this.bulletHitLayer, null, this.layer);
+          this.game.physics.arcade.overlap(bullets, this.layer, this.bulletHitLayer, null, this.layer); 
     };
 
     GameState.prototype.collider = function ()
