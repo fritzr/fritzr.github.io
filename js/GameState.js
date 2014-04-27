@@ -90,7 +90,7 @@ var BasicGame;
           this.game.stage.backgroundColor = '#000000';
 
           this.bg = this.game.add.tileSprite(0, 0, 1280, 800, 'level1bg');
-          this.bg.fixedToCamera = true;
+          this.bg.fixedToCamera = false;
 
           this.map = this.game.add.tilemap('level1');
 
