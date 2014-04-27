@@ -29,7 +29,7 @@ var BasicGame;
         this.load.spritesheet("continue_button", "assets/img/Buttons/Continue.png", 200, 55);
         this.load.spritesheet("controls_button", "assets/img/Buttons/Controls.png", 200, 55);
         this.load.spritesheet("credits_button", "assets/img/Buttons/Credits.png", 200, 55);
-        this.load.spritesheet("newgame_button", "assets/img/Buttons/NewGame.png", 200, 55);
+        this.load.spritesheet("newgame_button", "assets/img/Buttons/NewGame2.png", 200, 50);
         this.load.spritesheet("upgrades_button", "assets/img/Buttons/Upgrades.png", 255, 55);
         this.load.spritesheet("player_ship", "assets/img/playership.png");
         this.load.spritesheet("enemy_ship", "assets/img/enemyship.png");
