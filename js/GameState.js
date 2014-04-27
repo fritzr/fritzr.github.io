@@ -8,77 +8,7 @@ var __extends = this.__extends || function (d, b) {
 var BasicGame;
 
 (function (BasicGame) {
-  var Enemy = (function (_super) {
-      __extends(Enemy, _super);
-
-      // starting locations of enemies TODO: load from JSON for each level
-      Enemy.LOCATIONS = [
-          [250,16],  [715,816], [780,656], [625,144],
-          [975,665], [365,80],  [190,432], [420,958],
-          [670,890], [465,960]
-      ];
-
-      // how close to player enemy has to be to target the player
-      Enemy.ACQUIRE_DISTANCE = 100;
-
-      function Enemy(game, x, y, index, player, bullets) {
-          _super.call(this, game, x, y, 'enemy_ship');
-
-          this.player = player;
-          this.bullets = bullets;
-          this.fireRate = 1000;
-          this.nextFire = 0;
-          this.alive = true;
-
-          game.add.existing(this);
-          this.ship.body.setRectangle(31, 31, 2, 9);
-          this.ship.anchor.setTo(0.5, 0.5);
-
-          this.ship.name = index.toString();
-          this.ship.body.immovable = false;
-          this.ship.body.collideWorldBounds = true;
-          this.ship.angle = game.rnd.angle();
-
-          this.game.physics.velocityFromRotation(
-                  this.ship.rotation, 100, this.ship.body.velocity);
-      }
-
-      Enemy.prototype.update = function() {
-        if(!this.ship.alive){
-            return;
-        }
-        if (this.game.physics.arcade.distanceBetween(this.ship,this.player)
-                < ACQUIRE_DISTANCE)
-        {
-          this.ship.rotation = game.physics.angleBetween(this.ship, player);
-          if (this.game.time.now > this.nextFire){
-            bullet = this.bullets.getFirstExists(false);
-            if (bullet){
-              pew4 = game.add.audio('pew4');
-              pew4.play();
-              bullet.reset(this.ship.x, this.ship.y );
-              bullet.body.velocity.y = -400;
-              this.nextFire = game.time.now + 1000;
-
-              bullet.rotation = game.physics.arcade.moveToObject(
-                      bullet, this.player, 300);
-            }   
-          }
-        }
-        
-        if(this.ship.body.blocked.left 
-                || this.ship.body.blocked.right 
-                || this.ship.body.blocked.up 
-                || this.ship.body.blocked.down){
-          this.ship.angle = game.rnd.angle();
-          game.physics.arcade.velocityFromRotation(
-                  this.ship.rotation, 100, this.ship.body.velocity);
-        }
-    };
-
-      return Enemy;
-  })(Phaser.Sprite);
-  BasicGame.Enemy = Enemy;
+  	
 
   var GameState = (function (_super) {
     __extends(GameState, _super);
@@ -95,9 +25,68 @@ var BasicGame;
     var enemies = [];
     var bulletTime = 0;
     var stateText;
+    var LOCATIONS = [
+          [250,16],  [715,816], [780,656], [625,144],
+          [975,665], [365,80],  [190,432], [420,958],
+          [670,890], [465,960]
+      ];
+    enemy = function (game, index, player, bullets) {
+   
+	var x = [250, 715, 780, 625, 975, 365, 190, 420, 670, 465];
+    var y = [16, 816, 656, 144, 665, 80, 432, 958, 890, 960];
+      // how close to player enemy has to be to target the player
+      enemy.ACQUIRE_DISTANCE = 100;
+
+    this.game = game;
+    this.player = player;
+    this.bullets = bullets;
+    this.fireRate = 1000;
+    this.nextFire = 0;
+    this.alive = true;
+
+    this.ship = game.add.sprite(x[index], y[index], 'enemyship');
+    game.physics.enable(this.ship, Phaser.Physics.ARCADE.Body);
+    //this.ship.body.setRectangle(31, 31, 2, 9);
+    this.ship.anchor.setTo(0.5, 0.5);
+
+    this.ship.name = index.toString();
+    this.ship.body.immovable = false;
+    this.ship.body.collideWorldBounds = true;
+    this.ship.angle = game.rnd.angle();
+
+    game.physics.arcade.velocityFromRotation(this.ship.rotation, 100, this.ship.body.velocity);
+  };
+
+  enemy.prototype.update = function() {
+    if(this.ship.alive){
+      if (this.game.physics.arcade.distanceBetween(this.ship, this.player) < 100){
+        this.ship.rotation = game.physics.arcade.angleBetween(this.ship, player);
+        if (this.game.time.now > this.nextFire){
+          bullet = this.bullets.getFirstExists(false);
+          if (bullet){
+            pew4 = game.add.audio('pew4');
+            pew4.play();
+            bullet.reset(this.ship.x, this.ship.y );
+            bullet.body.velocity.y = -400;
+            this.nextFire = game.time.now + 1000;
+
+            bullet.rotation = game.physics.arcade.moveToObject(bullet, this.player, 300);
+          }   
+        }
+      }
+      
+      if(this.ship.body.blocked.left || this.ship.body.blocked.right || this.ship.body.blocked.up || this.ship.body.blocked.down){
+        this.ship.angle = this.game.rnd.angle();
+        this.game.physics.arcade.velocityFromRotation(this.ship.rotation, 100, this.ship.body.velocity);
+      }
+    }
+  };
+
+    
     
     GameState.prototype.create = function () 
     {
+		this.game.physics.startSystem(Phaser.Physics.ARCADE)
           this.game.stage.backgroundColor = '#000000';
 
           this.bg = this.game.add.tileSprite(0, 0, 300, 300, 'background');
@@ -120,8 +109,10 @@ var BasicGame;
           this.player.body.setSize(27, 27, 2, 9);
           this.player.anchor.setTo( 0.5, 0.5 );
           
+          //this.camera.follow(this.player);
+          
           bullets = this.game.add.group();
-          bullets.createMultiple(30, 'bullet');
+          bullets.createMultiple(1000, 'bullet');
           bullets.setAll('anchor.x', 0.5);
           bullets.setAll('anchor.y', 0.5);
           bullets.setAll('outOfBoundsKill', true);
@@ -133,10 +124,10 @@ var BasicGame;
           enemyBullets.setAll('outOfBoundsKill', true);
           
           enemies = [];
-          for (var i = 0; i < BasicGame.Enemy.LOCATIONS.length; i++){
-            enemies.push(new BasicGame.Enemy(game, 
-                        BasicGame.Enemy.LOCATIONS[i][0], // x
-                        BasicGame.Enemy.LOCATIONS[i][1], // y
+          for (var i = 0; i < LOCATIONS.length; i++){
+            enemies.push(new enemy(this, 
+                        LOCATIONS[i][0], // x
+                        LOCATIONS[i][1], // y
                         player, enemyBullets));
           }
 
@@ -150,7 +141,7 @@ var BasicGame;
 
     GameState.prototype.update = function()
     {
-      if(player.x > 960 && player.y > 960){
+      if(this.player.x > 960 && this.player.y > 960){
         this.stateText.content = " You Have Won! \n Click to restart";
         this.stateText.visible = true;
         this.game.input.onTap.addOnce(restart,this);
@@ -163,53 +154,53 @@ var BasicGame;
           
           this.bg.tilePosition.y -= 6;
          
-          this.player.rotation = this.game.physics.accelerateToPointer( player, this.game.input.activePointer, 200, 200, 200 );
+          this.player.rotation = this.game.physics.arcade.accelerateToPointer( this.player, this.game.input.activePointer, 200, 200, 200 );
 
           if (this.game.input.activePointer.isDown){
-              fireBullet();
+              this.fireBullet();
           }
           
           this.collider();
-          this.game.physics.overlap(enemyBullets, player, bulletHitPlayer, null, this);
+          this.game.physics.arcade.overlap(enemyBullets, player, this.bulletHitPlayer, null, this);
           for (var i = 0; i < enemies.length; i++){
             if (enemies[i].alive){
-              this.game.physics.collide(enemies[i].ship, layer);
-              this.game.physics.collide(player, enemies[i].ship);
-              this.game.physics.overlap(bullets, enemies[i].ship, bulletHitEnemy, null, this);
-              this.enemies[i].update();
+              this.game.physics.arcade.collide(enemies[i].ship, layer);
+              this.game.physics.arcade.collide(player, enemies[i].ship);
+              this.game.physics.arcade.overlap(bullets, enemies[i].ship, this.bulletHitEnemy, null, enemies[i].ship);
+              enemies[i].update();
             }
           }
           
-          this.game.physics.overlap(enemyBullets, layer, bulletHitLayer, null, this);
-          this.game.physics.overlap(bullets, layer, bulletHitLayer, null, this); 
+          this.game.physics.arcade.overlap(enemyBullets, layer, this.bulletHitLayer, null, this);
+          this.game.physics.arcade.overlap(bullets, layer, this.bulletHitLayer, null, this); 
     };
 
     GameState.prototype.collider = function ()
     {
-      this.game.physics.collide(player, layer);
+      this.game.physics.arcade.collide(this.player, layer);
     };
 
     GameState.prototype.fireBullet = function ()
     {
-        if (game.time.now > bulletTime){
-          this.bullet = this.bullets.getFirstExists(false);
-
-        if (bullet){
+        if (this.game.time.now > bulletTime){
+          this.bullet = bullets.getFirstExists(false);
+		this.game.physics.arcade.enableBody(this.bullet);
+        if (this.bullet){
           this.pew3 = this.game.add.audio('pew3');
           this.pew3.play();
-          this.bullet.reset(player.x, player.y );
+          this.bullet.reset(this.player.x, this.player.y );
           this.bullet.body.velocity.y = -400;
           this.bulletTime = this.game.time.now + 200;
-          this.bullet.rotation = this.game.physics.moveToPointer(bullet, 300);
+          this.bullet.rotation = this.game.physics.arcade.moveToPointer(this.bullet, 300);
         }
       }
     };
 
     GameState.prototype.bulletHitEnemy = function (bullet,ship)
     {
-        this.explosion = this.sgame.add.audio('explosion');
         this.explosion = this.game.add.audio('explosion');
-        explosion.play();
+        this.explosion = this.game.add.audio('explosion');
+        this.explosion.play();
         bullet.kill();
         ship.kill();
         ship.alive = false;
