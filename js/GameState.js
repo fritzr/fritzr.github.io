@@ -131,7 +131,7 @@ var BasicGame;
                         player, enemyBullets));
           }
 
-          this.game.camera.follow(player);
+          this.game.camera.follow(this.player);
           
           this.stateText = this.game.add.text(150,100,'', { fontSize: '84px', fill: '#000000' });
           this.stateText.anchor.setTo(0.5, 0.5);
