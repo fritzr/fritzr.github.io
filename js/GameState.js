@@ -89,7 +89,7 @@ var BasicGame;
 		this.game.physics.startSystem(Phaser.Physics.ARCADE)
           this.game.stage.backgroundColor = '#000000';
 
-          this.bg = this.game.add.tileSprite(0, 0, 1280, 800, 'level1bg');
+          this.bg = this.game.add.tileSprite(0, 0, 3600, 2520, 'level1bg');
           this.bg.fixedToCamera = false;
 
           this.map = this.game.add.tilemap('level1');
