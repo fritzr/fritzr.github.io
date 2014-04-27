@@ -109,7 +109,7 @@ var BasicGame;
           this.player.body.setSize(27, 27, 2, 9);
           this.player.anchor.setTo( 0.5, 0.5 );
           
-          this.camera.follow(this.player);
+          //this.camera.follow(this.player);
           
           bullets = this.game.add.group();
           bullets.createMultiple(1000, 'bullet');
