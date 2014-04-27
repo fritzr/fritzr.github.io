@@ -23,7 +23,7 @@ var BasicGame;
         this.controlsbutton = this.add.button(100,155, 'controls_button', this.actionOnClick, this, 1,0,1);
         this.controlsbutton = this.add.button(100,210, 'credits_button', this.actionOnClick, this, 1,0,1);
         this.newgamebutton = this.add.button(100,265, 'newgame_button', this.actionOnClick, this, 1,0,1);
-        this.upgradesbutton = this.add.button(100,320, 'upgrades_button', this.actionOnClick, this, 1,0,1);
+        this.upgradesbutton = this.add.button(100,320, 'upgrades_button', this.startUpgrade, this, 1,0,1);
         var i = 0;
     };
 
@@ -34,6 +34,11 @@ var BasicGame;
     MainMenu.prototype.startGame = function () {
       this.music.stop();
       this.game.state.start("GameState");
+    };
+    
+    MainMenu.prototype.startUpgrade = function(){
+    	this.music.stop();
+    	this.game.state.start("Upgrades");	
     };
     
     MainMenu.prototype.actionOnClick = function () {
