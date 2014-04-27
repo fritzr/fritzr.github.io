@@ -164,7 +164,7 @@ var BasicGame;
           this.game.physics.arcade.overlap(enemyBullets, player, this.bulletHitPlayer, null, this);
           for (var i = 0; i < enemies.length; i++){
             if (enemies[i].alive){
-              this.game.physics.arcade.collide(enemies[i].ship, layer);
+              this.game.physics.arcade.collide(enemies[i].ship, this.layer);
               this.game.physics.arcade.collide(player, enemies[i].ship);
               this.game.physics.arcade.overlap(bullets, enemies[i].ship, this.bulletHitEnemy, null, enemies[i].ship);
               enemies[i].update();
