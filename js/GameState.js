@@ -25,6 +25,7 @@ var BasicGame;
     var enemies = [];
     var bulletTime = 0;
     var stateText;
+    var explode;
     var LOCATIONS = [
           [250,16],  [715,816], [780,656], [625,144],
           [975,665], [365,80],  [190,432], [420,958],
@@ -43,7 +44,7 @@ var BasicGame;
     this.fireRate = 1000;
     this.nextFire = 0;
     this.alive = true;
-
+    this.explode = explode;
     this.ship = game.add.sprite(x[index], y[index], 'enemyship');
     game.physics.enable(this.ship, Phaser.Physics.ARCADE.Body);
     //this.ship.body.setRectangle(31, 31, 2, 9);
@@ -86,7 +87,8 @@ var BasicGame;
     
     GameState.prototype.create = function () 
     {
-		this.game.physics.startSystem(Phaser.Physics.ARCADE)
+		      this.game.physics.startSystem(Phaser.Physics.ARCADE);
+
           this.game.stage.backgroundColor = '#000000';
 
           this.bg = this.game.add.tileSprite(0, 0, 3600, 2520, 'level1bg');
