@@ -185,7 +185,7 @@ var BasicGame;
 
     GameState.prototype.fireBullet = function ()
     {
-        if (this.game.time.now > bulletTime){
+        if (this.game.time.now > this.bulletTime){
           this.bullet = bullets.getFirstExists(false);
 		this.game.physics.arcade.enableBody(this.bullet);
         if (this.bullet){
