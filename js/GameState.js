@@ -223,6 +223,7 @@ var BasicGame;
             
             stateText.content = " You Have Failed! \n Click to restart";
             stateText.visible = true;
+            this.game.state.start("GameState");
 			//this.game.input.activePointer.onDown.add(this.restart, this.game);
             //this.game.input.activePointer.onTap.addOnce(this.restart,this.game);
 
