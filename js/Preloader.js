@@ -38,6 +38,7 @@ var BasicGame;
         this.load.image('bullet', 'assets/img/bullet.png');
         this.load.tilemap('level1', 'assets/img/spacetiles.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('level2', 'assets/img/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.image('tiles-2', 'assets/img/tiles/LevelOne.png');
         this.load.image('tiles-1', 'assets/img/tiles/space_tiles.png');
         this.load.spritesheet('playership', 'assets/img/playership.png', 32, 48);
         this.load.spritesheet('enemyship', 'assets/img/enemyship.png', 32, 48);
