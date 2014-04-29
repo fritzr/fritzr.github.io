@@ -185,7 +185,8 @@ var BasicGame;
 
     GameState.prototype.fireBullet = function ()
     {
-        if (this.game.time.now > this.bulletTime){
+        if (this.game.time.now > bulletTime){
+        	console.log(bulletTime);
           this.bullet = bullets.getFirstExists(false);
 		this.game.physics.arcade.enableBody(this.bullet);
         if (this.bullet){
@@ -193,7 +194,7 @@ var BasicGame;
           this.pew3.play();
           this.bullet.reset(this.player.x, this.player.y );
           this.bullet.body.velocity.y = -400;
-          this.bulletTime = this.game.time.now + 200;
+          bulletTime = this.game.time.now + BasicGame.playerFireRate;
           this.bullet.rotation = this.game.physics.arcade.moveToPointer(this.bullet, 300);
         }
       }
