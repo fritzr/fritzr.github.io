@@ -31,7 +31,7 @@ var BasicGame;
           [975,665], [365,80],  [190,432], [420,958],
           [670,890], [465,960]
       ];
-    enemy = function (game, index, player, bullets) {
+    enemy = function (game, index1,index2, player, bullets) {
    
 	var x = [250, 715, 780, 625, 975, 365, 190, 420, 670, 465];
     var y = [16, 816, 656, 144, 665, 80, 432, 958, 890, 960];
@@ -45,12 +45,12 @@ var BasicGame;
     this.nextFire = 0;
     this.alive = true;
     this.explode = explode;
-    this.ship = game.add.sprite(x[index], y[index], 'enemyship');
+    this.ship = game.add.sprite(x[index1], y[index2], 'enemyship');
     game.physics.enable(this.ship, Phaser.Physics.ARCADE.Body);
     //this.ship.body.setRectangle(31, 31, 2, 9);
     this.ship.anchor.setTo(0.5, 0.5);
 
-    this.ship.name = index.toString();
+    //this.ship.name = index.toString();
     this.ship.body.immovable = false;
     this.ship.body.collideWorldBounds = true;
     this.ship.angle = game.rnd.angle();
@@ -61,17 +61,18 @@ var BasicGame;
   enemy.prototype.update = function() {
     if(this.ship.alive){
       if (this.game.physics.arcade.distanceBetween(this.ship, this.player) < 100){
-        this.ship.rotation = game.physics.arcade.angleBetween(this.ship, this.player);
+        this.ship.rotation = this.game.physics.arcade.angleBetween(this.ship, this.player);
         if (this.game.time.now > this.nextFire){
-          bullet = this.bullets.getFirstExists(false);
-          if (bullet){
-            pew4 = game.add.audio('pew4');
-            pew4.play();
-            bullet.reset(this.ship.x, this.ship.y );
-            bullet.body.velocity.y = -400;
-            this.nextFire = game.time.now + 1000;
+          this.bullet = this.bullets.getFirstExists(false);
+          this.game.physics.enable(this.bullet, Phaser.Physics.ARCADE.Body);
+          if (this.bullet){
+            this.pew4 = this.game.add.audio('pew4');
+            this.pew4.play();
+            this.bullet.reset(this.ship.x, this.ship.y );
+            this.bullet.body.velocity.y = -400;
+            this.nextFire = this.game.time.now + 1000;
 
-            bullet.rotation = game.physics.arcade.moveToObject(bullet, this.player, 300);
+            this.bullet.rotation = this.game.physics.arcade.moveToObject(this.bullet, this.player, 300);
           }   
         }
       }
@@ -130,7 +131,7 @@ var BasicGame;
             enemies.push(new enemy(this, 
                         LOCATIONS[i][0], // x
                         LOCATIONS[i][1], // y
-                        player, enemyBullets));
+                        this.player, enemyBullets));
           }
 
           this.game.camera.follow(this.player);
@@ -215,15 +216,15 @@ var BasicGame;
     
     GameState.prototype.bulletHitPlayer = function (bullet,player)
     {
-            explosion = game.add.audio('explosion');
+            explosion = this.game.add.audio('explosion');
             explosion.play();
             bullet.kill();
             player.kill();
             
-            stateText.content = " You Have Failed! \n Click to restart";
-            stateText.visible = true;
+            this.stateText.content = " You Have Failed! \n Click to restart";
+            this.stateText.visible = true;
 
-            game.input.onTap.addOnce(restart,this);
+            this.game.input.onTap.addOnce(this.restart,this);
     };
 
     GameState.prototype.resetBullet = function (bullet)
