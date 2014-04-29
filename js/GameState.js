@@ -45,7 +45,7 @@ var BasicGame;
     this.nextFire = 0;
     this.alive = true;
     this.explode = explode;
-    this.ship = game.add.sprite(x[index1], y[index2], 'enemyship');
+    this.ship = game.add.sprite(index1, index2, 'enemyship');
     game.physics.enable(this.ship, Phaser.Physics.ARCADE.Body);
     //this.ship.body.setRectangle(31, 31, 2, 9);
     this.ship.anchor.setTo(0.5, 0.5);
