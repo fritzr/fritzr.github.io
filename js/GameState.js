@@ -164,7 +164,7 @@ var BasicGame;
           }
           
           this.collider();
-          this.game.physics.arcade.overlap(enemyBullets, player, this.bulletHitPlayer, null, this);
+          this.game.physics.arcade.overlap(enemyBullets, player, this.bulletHitPlayer, null, this.player);
           for (var i = 0; i < enemies.length; i++){
             if (enemies[i].alive){
               this.game.physics.arcade.collide(enemies[i].ship, this.layer);
@@ -216,8 +216,8 @@ var BasicGame;
     
     GameState.prototype.bulletHitPlayer = function (bullet,player)
     {
-            explosion = this.game.add.audio('explosion');
-            explosion.play();
+            this.explosion = this.game.add.audio('explosion');
+            this.explosion.play();
             bullet.kill();
             player.kill();
             
