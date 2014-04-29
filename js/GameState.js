@@ -136,10 +136,10 @@ var BasicGame;
 
           this.game.camera.follow(this.player);
           
-          this.stateText = this.game.add.text(150,100,'', { fontSize: '84px', fill: '#000000' });
-          this.stateText.anchor.setTo(0.5, 0.5);
-          this.stateText.visible = false;
-          this.stateText.fixedToCamera = true;
+          stateText = this.game.add.text(150,100,'', { fontSize: '84px', fill: '#000000' });
+          stateText.anchor.setTo(0.5, 0.5);
+          stateText.visible = false;
+          stateText.fixedToCamera = true;
     };
 
     GameState.prototype.update = function()
@@ -164,7 +164,7 @@ var BasicGame;
           }
           
           this.collider();
-          this.game.physics.arcade.overlap(enemyBullets, player, this.bulletHitPlayer, null, this.player);
+          this.game.physics.arcade.overlap(enemyBullets, this.player, this.bulletHitPlayer, null, this.player);
           for (var i = 0; i < enemies.length; i++){
             if (enemies[i].alive){
               this.game.physics.arcade.collide(enemies[i].ship, this.layer);
@@ -221,10 +221,11 @@ var BasicGame;
             bullet.kill();
             player.kill();
             
-            this.stateText.content = " You Have Failed! \n Click to restart";
-            this.stateText.visible = true;
+            stateText.content = " You Have Failed! \n Click to restart";
+            stateText.visible = true;
+			//this.game.input.activePointer.onDown.add(this.restart, this.game);
+            //this.game.input.activePointer.onTap.addOnce(this.restart,this.game);
 
-            this.game.input.onTap.addOnce(this.restart,this);
     };
 
     GameState.prototype.resetBullet = function (bullet)
@@ -234,9 +235,10 @@ var BasicGame;
 
     GameState.prototype.restart = function ()
     {
-        game.world.removeAll();
-        preload();
-        create();
+    	this.game.state.start("GameState");
+        //this.game.world.removeAll();
+        //preload();
+        //create();
     };
 
     return GameState;
