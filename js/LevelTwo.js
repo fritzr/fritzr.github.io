@@ -25,6 +25,7 @@ var BasicGame;
     var enemies = [];
     var bulletTime = 0;
     var stateText;
+    var explode_audio;
     var explode;
     var LOCATIONS = [
           [250,16],  [715,816], [780,656], [625,144],
@@ -33,11 +34,10 @@ var BasicGame;
       ];
     enemy = function (game, index1,index2, player, bullets) {
    
-	var x = [250, 715, 780, 625, 975, 365, 190, 420, 670, 465];
+	  var x = [250, 715, 780, 625, 975, 365, 190, 420, 670, 465];
     var y = [16, 816, 656, 144, 665, 80, 432, 958, 890, 960];
       // how close to player enemy has to be to target the player
-      enemy.ACQUIRE_DISTANCE = 100;
-
+    enemy.ACQUIRE_DISTANCE = 100;
     this.game = game;
     this.player = player;
     this.bullets = bullets;
@@ -54,7 +54,6 @@ var BasicGame;
     this.ship.body.immovable = false;
     this.ship.body.collideWorldBounds = true;
     this.ship.angle = game.rnd.angle();
-
     game.physics.arcade.velocityFromRotation(this.ship.rotation, 100, this.ship.body.velocity);
   };
 
@@ -112,6 +111,11 @@ var BasicGame;
           this.player.body.setSize(27, 27, 2, 9);
           this.player.anchor.setTo( 0.5, 0.5 );
           
+<<<<<<< HEAD:js/LevelTwo.js
+=======
+          //this.camera.follow(this.player);
+
+>>>>>>> 88ff228a6cf800a1b478043098f85c012c0dc795:js/GameState.js
           
           bullets = this.game.add.group();
           bullets.createMultiple(1000, 'bullet');
@@ -124,7 +128,8 @@ var BasicGame;
           enemyBullets.setAll('anchor.x', 0.5);
           enemyBullets.setAll('anchor.y', 0.5);
           enemyBullets.setAll('outOfBoundsKill', true);
-          
+
+
           enemies = [];
           for (var i = 0; i < LOCATIONS.length; i++){
             enemies.push(new enemy(this, 
@@ -139,6 +144,7 @@ var BasicGame;
           stateText.anchor.setTo(0.5, 0.5);
           stateText.visible = false;
           stateText.fixedToCamera = true;
+
     };
 
     LevelTwo.prototype.update = function()
@@ -185,6 +191,7 @@ var BasicGame;
     LevelTwo.prototype.fireBullet = function ()
     {
         if (this.game.time.now > bulletTime){
+        	console.log(bulletTime);
           this.bullet = bullets.getFirstExists(false);
 		this.game.physics.arcade.enableBody(this.bullet);
         if (this.bullet){
@@ -192,7 +199,7 @@ var BasicGame;
           this.pew3.play();
           this.bullet.reset(this.player.x, this.player.y );
           this.bullet.body.velocity.y = -400;
-          this.bulletTime = this.game.time.now + 200;
+          bulletTime = this.game.time.now + BasicGame.playerFireRate;
           this.bullet.rotation = this.game.physics.arcade.moveToPointer(this.bullet, 300);
         }
       }
@@ -200,9 +207,14 @@ var BasicGame;
 
     LevelTwo.prototype.bulletHitEnemy = function (bullet,ship)
     {
-        this.explosion = this.game.add.audio('explosion');
-        this.explosion = this.game.add.audio('explosion');
-        this.explosion.play();
+        this.explosion_audio = this.game.add.audio('explosion');
+        this.explosion_audio.play();
+
+         var explosion = this.game.add.sprite(ship.body.x,ship.body.y,'explode');
+         explosion.animations.add('explode');
+         explosion.play('explode',25,false,true);
+
+
         bullet.kill();
         ship.kill();
         ship.alive = false;
@@ -215,8 +227,13 @@ var BasicGame;
     
     LevelTwo.prototype.bulletHitPlayer = function (bullet,player)
     {
-            this.explosion = this.game.add.audio('explosion');
-            this.explosion.play();
+            this.explosion_audio = this.game.add.audio('explosion');
+            this.explosion_audio.play();
+
+            var explosion = this.game.add.sprite(player.body.x,player.body.y,'explode');
+            explosion.animations.add('explode');
+            explosion.play('explode',25,false,true);
+
             bullet.kill();
             player.kill();
             

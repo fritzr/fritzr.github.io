@@ -42,12 +42,16 @@ var BasicGame;
         this.load.audio('pew3', 'assets/sound/pew3.ogg');
         this.load.audio('pew4', 'assets/sound/pew4.ogg');
         this.load.audio('explosion', 'assets/sound/explosion.ogg');
+<<<<<<< HEAD
         this.load.spritesheet('explode','assets\img\explosion-sprite-sheet-i0.png');
                 this.load.spritesheet("continue_button", "assets/img/Buttons/Continue.png", 200, 55);
         this.load.spritesheet("controls_button", "assets/img/Buttons/Controls.png", 200, 55);
         this.load.spritesheet("credits_button", "assets/img/Buttons/Credits.png", 200, 55);
         this.load.spritesheet("newgame_button", "assets/img/Buttons/NewGame2.png", 200, 50);
         this.load.spritesheet("upgrades_button", "assets/img/Buttons/Upgrades.png", 255, 55);
+=======
+        this.load.spritesheet('explode','assets/img/explosion.png',50,50);
+>>>>>>> 88ff228a6cf800a1b478043098f85c012c0dc795
     };
 
     Preloader.prototype.update = function () {

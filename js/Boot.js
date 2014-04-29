@@ -23,6 +23,7 @@ var BasicGame;
         console.log('Booting...');
       this.game.input.maxPointers = 1;
       this.game.stage.disableVisibilityChange = true;
+      BasicGame.playerFireRate = 200;
       this.game.state.start("Preloader");
     };
     
