@@ -10,9 +10,9 @@ var BasicGame;
 (function (BasicGame) {
   	
 
-  var GameState = (function (_super) {
-    __extends(GameState, _super);
-    function GameState() {
+  var LevelOne = (function (_super) {
+    __extends(LevelOne, _super);
+    function LevelOne() {
       _super.apply(this, arguments);
     }
     
@@ -25,6 +25,7 @@ var BasicGame;
     var enemies = [];
     var bulletTime = 0;
     var stateText;
+    var button;
     var explode;
     var LOCATIONS = [
           [250,16],  [715,816], [780,656], [625,144],
@@ -86,7 +87,7 @@ var BasicGame;
 
     
     
-    GameState.prototype.create = function () 
+    LevelOne.prototype.create = function () 
     {
 		      this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -136,13 +137,18 @@ var BasicGame;
 
           this.game.camera.follow(this.player);
           
-          stateText = this.game.add.text(150,100,'', { fontSize: '84px', fill: '#000000' });
+          stateText = this.game.add.text(150,100,'POOOOOOOO', { fontSize: '84px', fill: '#000000' });
           stateText.anchor.setTo(0.5, 0.5);
-          stateText.visible = false;
+          //stateText.visible = false;
           stateText.fixedToCamera = true;
+          
+          button = this.game.add.button(this.game.centerX, this.game.centerY, 'continue_button', this.endLevel, this, 2, 1, 0);
+          button.anchor.setTo(0.5,0.5);
+          button.fixedToCamera = true;
+          button.visible = false;
     };
 
-    GameState.prototype.update = function()
+    LevelOne.prototype.update = function()
     {
       if(this.player.x > 960 && this.player.y > 960){
         this.stateText.content = " You Have Won! \n Click to restart";
@@ -153,6 +159,12 @@ var BasicGame;
           if(this.player.body.blocked.left && this.player.body.blocked.right){
             this.player.body.x = 3;
             this.player.body.y = 180;
+          }
+          
+          if(this.player.body.y >= 930){
+            stateText.setText("You Have Won!")
+            stateText.visible = true;
+            button.visible = true;
           }
           
           //this.bg.tilePosition.y -= 6;
@@ -178,12 +190,12 @@ var BasicGame;
           this.game.physics.arcade.overlap(bullets, this.layer, this.bulletHitLayer, null, this.layer); 
     };
 
-    GameState.prototype.collider = function ()
+    LevelOne.prototype.collider = function ()
     {
       this.game.physics.arcade.collide(this.player, this.layer);
     };
 
-    GameState.prototype.fireBullet = function ()
+    LevelOne.prototype.fireBullet = function ()
     {
         if (this.game.time.now > bulletTime){
           this.bullet = bullets.getFirstExists(false);
@@ -199,7 +211,7 @@ var BasicGame;
       }
     };
 
-    GameState.prototype.bulletHitEnemy = function (bullet,ship)
+    LevelOne.prototype.bulletHitEnemy = function (bullet,ship)
     {
         this.explosion = this.game.add.audio('explosion');
         this.explosion = this.game.add.audio('explosion');
@@ -209,42 +221,53 @@ var BasicGame;
         ship.alive = false;
     };
 
-    GameState.prototype.bulletHitLayer = function (bullet,Layer)
+    LevelOne.prototype.bulletHitLayer = function (bullet,Layer)
     {
       bullet.kill();
     };
     
-    GameState.prototype.bulletHitPlayer = function (bullet,player)
+    LevelOne.prototype.bulletHitPlayer = function (bullet,player)
     {
-            this.explosion = this.game.add.audio('explosion');
-            this.explosion.play();
-            bullet.kill();
-            player.kill();
-            
-            stateText.content = " You Have Failed! \n Click to restart";
-            stateText.visible = true;
-            this.game.state.start("GameState");
-			//this.game.input.activePointer.onDown.add(this.restart, this.game);
-            //this.game.input.activePointer.onTap.addOnce(this.restart,this.game);
-
+      this.explosion = this.game.add.audio('explosion');
+      this.explosion.play();
+      bullet.kill();
+      player.kill();
+      player.alive = false;
+      
+      stateText.setText("You Have Failed!\n Click to restart");
+      //stateText.visible = true;
+      //this.game.state.start("LevelOne");
+      //this.game.input.onTap.addOnce(restart,this);
+      button.visible = true;
     };
 
-    GameState.prototype.resetBullet = function (bullet)
+    LevelOne.prototype.resetBullet = function (bullet)
     {
         bullet.kill();
     };
-
-    GameState.prototype.restart = function ()
+    
+    LevelOne.prototype.endLevel = function(){
+      if(player.alive == false){
+        this.restart;
+      }else this.finished;
+    }
+    
+    LevelOne.prototype.restart = function ()
     {
-    	this.game.state.start("GameState");
+    	this.game.state.start("LevelOne");
         //this.game.world.removeAll();
         //preload();
         //create();
     };
+    
+    LevelOne.prototype.finished = function (){
+      //BasicGame.Level += 1;
+      this.game.state.start("Upgrades");
+    }
 
-    return GameState;
+    return LevelOne;
   })(Phaser.State);
-  BasicGame.GameState = GameState;
+  BasicGame.LevelOne = LevelOne;
 
 
 

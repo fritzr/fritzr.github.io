@@ -28,18 +28,14 @@ var BasicGame;
         this.load.image("level1bg", "assets/img/level1background.jpg");
         this.load.image("upgrade_background", "assets/img/upgradeBackground.jpg");
         this.load.audio("music_title", "assets/sound/title.mp3");
-        this.load.spritesheet("continue_button", "assets/img/Buttons/Continue.png", 200, 55);
-        this.load.spritesheet("controls_button", "assets/img/Buttons/Controls.png", 200, 55);
-        this.load.spritesheet("credits_button", "assets/img/Buttons/Credits.png", 200, 55);
-        this.load.spritesheet("newgame_button", "assets/img/Buttons/NewGame2.png", 200, 50);
-        this.load.spritesheet("upgrades_button", "assets/img/Buttons/Upgrades.png", 255, 55);
+
         this.load.spritesheet("player_ship", "assets/img/playership.png");
         this.load.spritesheet("enemy_ship", "assets/img/enemyship.png");
         this.load.image('bullet', 'assets/img/bullet.png');
-        this.load.tilemap('level1', 'assets/img/spacetiles.json', null, Phaser.Tilemap.TILED_JSON);
-        this.load.tilemap('level2', 'assets/img/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
-        this.load.image('tiles-2', 'assets/img/tiles/LevelOne.png');
-        this.load.image('tiles-1', 'assets/img/tiles/space_tiles.png');
+        this.load.tilemap('level2', 'assets/img/spacetiles.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap('level1', 'assets/img/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.image('tiles-1', 'assets/img/tiles/LevelOne.png');
+        this.load.image('tiles-2', 'assets/img/tiles/space_tiles.png');
         this.load.spritesheet('playership', 'assets/img/playership.png', 32, 48);
         this.load.spritesheet('enemyship', 'assets/img/enemyship.png', 32, 48);
         this.load.image('background', 'assets/img/Background.jpg');
@@ -47,6 +43,11 @@ var BasicGame;
         this.load.audio('pew4', 'assets/sound/pew4.ogg');
         this.load.audio('explosion', 'assets/sound/explosion.ogg');
         this.load.spritesheet('explode','assets\img\explosion-sprite-sheet-i0.png');
+                this.load.spritesheet("continue_button", "assets/img/Buttons/Continue.png", 200, 55);
+        this.load.spritesheet("controls_button", "assets/img/Buttons/Controls.png", 200, 55);
+        this.load.spritesheet("credits_button", "assets/img/Buttons/Credits.png", 200, 55);
+        this.load.spritesheet("newgame_button", "assets/img/Buttons/NewGame2.png", 200, 50);
+        this.load.spritesheet("upgrades_button", "assets/img/Buttons/Upgrades.png", 255, 55);
     };
 
     Preloader.prototype.update = function () {
