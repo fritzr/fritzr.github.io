@@ -61,7 +61,7 @@ var BasicGame;
   enemy.prototype.update = function() {
     if(this.ship.alive){
       if (this.game.physics.arcade.distanceBetween(this.ship, this.player) < 100){
-        this.ship.rotation = game.physics.arcade.angleBetween(this.ship, player);
+        this.ship.rotation = game.physics.arcade.angleBetween(this.ship, this.player);
         if (this.game.time.now > this.nextFire){
           bullet = this.bullets.getFirstExists(false);
           if (bullet){
