@@ -143,7 +143,7 @@ var BasicGame;
           
           stateText = this.game.add.text(150,100,'POOOOOOOO', { fontSize: '84px', fill: '#000000' });
           stateText.anchor.setTo(0.5, 0.5);
-          //stateText.visible = false;
+          stateText.visible = false;
           stateText.fixedToCamera = true;
           
           button = this.game.add.button(this.game.centerX, this.game.centerY, 'continue_button', this.endLevel, this, 2, 1, 0);
@@ -223,6 +223,7 @@ var BasicGame;
         this.explosion.play();
 
          var explosion = this.game.add.sprite(ship.body.x,ship.body.y,'explode');
+         explosion.anchor.setTo(0.5,0.5);
          explosion.animations.add('explode');
          explosion.play('explode',25,false,true);
 
@@ -242,6 +243,7 @@ var BasicGame;
       this.explosion.play();
 
       var explosion = this.game.add.sprite(player.body.x,player.body.y,'explode');
+      explosion.anchor.setTo(0.5,0.5);
       explosion.animations.add('explode');
       explosion.play('explode',25,false,true);
 
