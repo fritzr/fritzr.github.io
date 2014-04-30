@@ -16,6 +16,7 @@ var BasicGame;
       _super.apply(this, arguments);
     }
     
+    var enemiesKilled = 0;
     var map;
     var tileset;
     var layer;
@@ -144,7 +145,7 @@ var BasicGame;
 
     GameState.prototype.update = function()
     {
-      if(this.player.x > 960 && this.player.y > 960){
+      	if(this.player.x > 960 && this.player.y > 960){
         this.stateText.content = " You Have Won! \n Click to restart";
         this.stateText.visible = true;
         this.game.input.onTap.addOnce(restart,this);
@@ -204,6 +205,7 @@ var BasicGame;
     {
         this.explosion = this.game.add.audio('explosion');
         this.explosion = this.game.add.audio('explosion');
+        this.enemiesKilled+= 1;
         this.explosion.play();
         bullet.kill();
         ship.kill();
@@ -242,6 +244,15 @@ var BasicGame;
         //preload();
         //create();
     };
+    
+    GameState.prototype.win = function ()
+    {	
+    	this.stateText.content = "Congratulations! Score: " + enemiesKilled * (this.game.time.now/1000000);
+    	BasicGame.currency += enemiesKilled * (this.game.time.now/1000000);
+    	this.game.world.removeAll();
+    }
+    
+    
 
     return GameState;
   })(Phaser.State);

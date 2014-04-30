@@ -20,12 +20,14 @@ var BasicGame;
         background.scale.setTo(0.65, 0.75);
         //this.music = this.add.audio('music_title');
         //this.music.play();
-      	this.backButton = this.add.button(700, 0, 'upgrades_button', this.backToMenu, this, 1,0,1);
+      	this.backButton = this.add.button(700, 0, 'continue_button', this.backToMenu, this, 1,0,1);
         //this.upgradesbutton = this.add.button(300,300, 'upgrades_button', this.actionOnClick, this, 1,0,1);
         var i = 0;
         var text = "Upgrades";
-    	var style = { font: "65px Arial", fill: "#ff0044", align: "center" };
-
+    	var style = { font: "30px Arial", fill: "#ff0044", align: "center" };
+		var fireRate = "Increased Fire Rate";
+		var frLabel = this.add.text(50, this.world.centerY - 100, fireRate, style);
+		var LightLabel = this.add.text(50, this.world.centerY - 50, "Light Distance", style);
     	var t = this.add.text(this.world.centerX-300, 0, text, style);
     	
     };
