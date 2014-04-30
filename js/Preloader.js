@@ -44,7 +44,8 @@ var BasicGame;
         this.load.audio('pew3', 'assets/sound/pew3.ogg');
         this.load.audio('pew4', 'assets/sound/pew4.ogg');
         this.load.audio('explosion', 'assets/sound/explosion.ogg');
-        this.load.spritesheet('explode','assets\img\explosion-sprite-sheet-i0.png');
+        //this.load.spritesheet('explode','assets/img/explosion.png');
+        this.load.spritesheet('upgradeButton', 'assets/img/Buttons/UpgradeButton.png',85,75);
         
         //global variables
         

@@ -27,6 +27,7 @@ var BasicGame;
     	var style = { font: "30px Arial", fill: "#ff0044", align: "center" };
 		var fireRate = "Increased Fire Rate";
 		var frLabel = this.add.text(50, this.world.centerY - 100, fireRate, style);
+		this.fr1Button = this.add.button(100, this.world.centerY - 100, 'upgradeButton', this.FirstUpgrade, this, 1,0,1);
 		var LightLabel = this.add.text(50, this.world.centerY - 50, "Light Distance", style);
     	var t = this.add.text(this.world.centerX-300, 0, text, style);
     	
@@ -35,6 +36,10 @@ var BasicGame;
     Upgrades.prototype.update = function() {
 
     };
+    
+    Upgrades.prototype.FirstUpgrade = function(){
+    	
+    }
 
     Upgrades.prototype.startGame = function () {
     };
