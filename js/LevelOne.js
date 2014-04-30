@@ -100,9 +100,9 @@ var BasicGame;
           this.bg = this.game.add.tileSprite(0, 0, 3600, 2520, 'level1bg');
           this.bg.fixedToCamera = false;
 
-          this.map = this.game.add.tilemap('level0');
+          this.map = this.game.add.tilemap('level2');
 
-          this.map.addTilesetImage('tiles-0');
+          this.map.addTilesetImage('tiles-2');
 
           this.map.setCollisionByExclusion([0]);
 
