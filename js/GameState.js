@@ -23,6 +23,7 @@ var BasicGame;
     var player;
     var fireButton;
     var bg;
+    var beginTime = 0;
     var enemies = [];
     var bulletTime = 0;
     var stateText;
@@ -141,6 +142,7 @@ var BasicGame;
           stateText.anchor.setTo(0.5, 0.5);
           stateText.visible = false;
           stateText.fixedToCamera = true;
+          beginTime = this.game.time.now;
     };
 
     GameState.prototype.update = function()
