@@ -32,28 +32,24 @@ var BasicGame;
         this.load.spritesheet("player_ship", "assets/img/playership.png");
         this.load.spritesheet("enemy_ship", "assets/img/enemyship.png");
         this.load.image('bullet', 'assets/img/bullet.png');
-<<<<<<< HEAD
         this.load.tilemap('level1', 'assets/img/spacetiles.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('level2', 'assets/img/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('level3', 'assets/img/level2.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.image('tiles-2', 'assets/img/tiles/LevelOne.png');
         this.load.image('tiles-1', 'assets/img/tiles/space_tiles.png');
         this.load.image('tiles-3', 'assets/img/tiles/icemap.png');
-=======
         this.load.tilemap('level2', 'assets/img/levelTwo.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('level1', 'assets/img/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('level0', 'assets/img/spacetiles.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.image('tiles-0', 'assets/img/tiles/space_tiles.png', null, Phaser.Tilemap.TILED_JSON);
         this.load.image('tiles-1', 'assets/img/tiles/LevelOne.png');
         this.load.image('tiles-2', 'assets/img/tiles/LevelTwo.png');
->>>>>>> FETCH_HEAD
         this.load.spritesheet('playership', 'assets/img/playership.png', 32, 48);
         this.load.spritesheet('enemyship', 'assets/img/enemyship.png', 27, 30);
         this.load.image('background', 'assets/img/Background.jpg');
         this.load.audio('pew3', 'assets/sound/pew3.ogg');
         this.load.audio('pew4', 'assets/sound/pew4.ogg');
         this.load.audio('explosion', 'assets/sound/explosion.ogg');
-<<<<<<< HEAD
         this.load.spritesheet('explode','assets\img\explosion-sprite-sheet-i0.png');
         
         //global variables
@@ -61,7 +57,6 @@ var BasicGame;
         BasicGame.currency = 0;
         
         
-=======
         this.load.spritesheet('explode','assets/img/explosion.png');
         this.load.spritesheet("continue_button", "assets/img/Buttons/Continue.png", 200, 50);
         this.load.spritesheet("controls_button", "assets/img/Buttons/Controls.png", 200, 50);
@@ -69,7 +64,6 @@ var BasicGame;
         this.load.spritesheet("newgame_button", "assets/img/Buttons/NewGame.png", 200, 50);
         this.load.spritesheet("upgrades_button", "assets/img/Buttons/Upgrades.png", 200, 50);
         this.load.spritesheet('explode','assets/img/explosion.png',50,50);
->>>>>>> FETCH_HEAD
     };
 
     Preloader.prototype.update = function () {

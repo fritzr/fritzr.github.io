@@ -1,8 +1,0 @@
-4/12<br/>
-Found a TileSet that might be used for the final game. It depends on how everyone feels about the artwork. I created a map using the TileSet in the program called Tiled. I uploaded the tmx file, the json file, and the TileSet to FileZilla. This means my group can essentially open the tmx file with Tiled and see if they like the map,and if they do, it will be updated into the game.
-<br/><br/>
-4/18<br/>
-Created a more challenging second maze level. 
-<br/><br/>
-4/24<br/>
-Helped update the GameState.js for loading game with multiple states.
