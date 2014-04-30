@@ -20,11 +20,11 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"..\/tiles\/icemap.png",
+         "image":"..\/tiles\/levelTwo.png",
          "imageheight":512,
          "imagewidth":512,
          "margin":0,
-         "name":"ice",
+         "name":"levelTwo",
          "properties":
             {
 

@@ -32,7 +32,8 @@ var BasicGame;
           [975,665], [365,80],  [190,432], [420,958],
           [670,890], [465,960]
       ];
-    enemy = function (game, index1,index2, player, bullets) {
+    var wonGame = false;
+  enemy = function (game, index1,index2, player, bullets) {
    
 	var x = [250, 715, 780, 625, 975, 365, 190, 420, 670, 465];
     var y = [16, 816, 656, 144, 665, 80, 432, 958, 890, 960];
@@ -50,6 +51,9 @@ var BasicGame;
     game.physics.enable(this.ship, Phaser.Physics.ARCADE.Body);
     //this.ship.body.setRectangle(31, 31, 2, 9);
     this.ship.anchor.setTo(0.5, 0.5);
+    
+    this.ship.animations.add('fly');
+    this.ship.animations.play('fly', 10, true);
 
     //this.ship.name = index.toString();
     this.ship.body.immovable = false;
@@ -96,11 +100,11 @@ var BasicGame;
           this.bg = this.game.add.tileSprite(0, 0, 3600, 2520, 'level1bg');
           this.bg.fixedToCamera = false;
 
-          this.map = this.game.add.tilemap('level1');
+          this.map = this.game.add.tilemap('level0');
 
-          this.map.addTilesetImage('tiles-1');
+          this.map.addTilesetImage('tiles-0');
 
-          this.map.setCollisionByExclusion([ 13, 14, 15, 16, 46, 47, 48, 49, 50, 51 ]);
+          this.map.setCollisionByExclusion([0]);
 
           this.layer = this.map.createLayer('Tile Layer 1');
 
@@ -161,10 +165,11 @@ var BasicGame;
             this.player.body.y = 180;
           }
           
-          if(this.player.body.y >= 930){
+          if(this.player.x >= 930){
             stateText.setText("You Have Won!")
             stateText.visible = true;
             button.visible = true;
+            this.wonGame = true;
           }
           
           //this.bg.tilePosition.y -= 6;
@@ -247,9 +252,10 @@ var BasicGame;
     };
     
     LevelOne.prototype.endLevel = function(){
-      if(player.alive == false){
-        this.restart;
-      }else this.finished;
+      console.log(this.wonGame);
+      if(!this.wonGame){
+        this.restart();
+      }else this.finished();
     }
     
     LevelOne.prototype.restart = function ()
@@ -261,7 +267,7 @@ var BasicGame;
     };
     
     LevelOne.prototype.finished = function (){
-      //BasicGame.Level += 1;
+      BasicGame.Level += 1;
       this.game.state.start("Upgrades");
     }
 
