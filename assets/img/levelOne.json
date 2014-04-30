@@ -19,8 +19,8 @@
  "tileheight":30,
  "tilesets":[
         {
-         "firstgid":1,
-         "image":"..\/..\/..\/..\/..\/Desktop\/tilemap3.png",
+         "firstgid":0,
+         "image":"..\/tiles/LevelOne.png",
          "imageheight":512,
          "imagewidth":512,
          "margin":0,
