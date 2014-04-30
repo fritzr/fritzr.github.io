@@ -33,7 +33,7 @@ var BasicGame;
     
     MainMenu.prototype.startGame = function () {
       this.music.stop();
-      this.game.state.start("GameState");
+      this.game.state.start("LevelOne");
     };
     
     MainMenu.prototype.startUpgrade = function(){
