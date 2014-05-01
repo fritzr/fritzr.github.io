@@ -166,7 +166,7 @@ var BasicGame;
           
           if(this.player.x >= 960){
           	var currentTime = this.game.time.now;
-          	score = 1000 + (enemiesKilled*500) - (currentTime - startTime)/100000;
+          	score = 2000 + (enemiesKilled*500) - (currentTime - startTime)/100000;
       		  BasicGame.currency += score/1000;
             this.wonGame = true;
             this.game.state.start('levelWon');
