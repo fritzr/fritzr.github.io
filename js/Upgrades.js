@@ -119,7 +119,7 @@ var BasicGame;
     };
     
     Upgrades.prototype.toLevel = function(){
-      this.music.stop();
+      //this.music.stop();
       if(BasicGame.level == 1)
         this.game.state.start('LevelOne');
       if(BasicGame.level == 2)
