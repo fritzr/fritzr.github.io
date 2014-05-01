@@ -66,7 +66,7 @@ var BasicGame;
   };
 
   enemy.prototype.update = function() {
-    if(this.ship.alive){
+    if(this.ship.alive && this.player.alive){
       if (this.game.physics.arcade.distanceBetween(this.ship, this.player) < 100){
         this.ship.rotation = this.game.physics.arcade.angleBetween(this.ship, this.player);
         if (this.game.time.now > this.nextFire){
@@ -208,9 +208,9 @@ var BasicGame;
 
     LevelOne.prototype.fireBullet = function ()
     {
-        if (this.game.time.now > bulletTime){
-          this.bullet = bullets.getFirstExists(false);
-		this.game.physics.arcade.enableBody(this.bullet);
+      if (this.game.time.now > bulletTime && this.player.alive){
+        this.bullet = bullets.getFirstExists(false);
+        this.game.physics.arcade.enableBody(this.bullet);
         if (this.bullet){
           this.pew3 = this.game.add.audio('pew3');
           this.pew3.play();
