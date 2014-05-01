@@ -34,8 +34,6 @@ var BasicGame;
         this.load.image('bullet', 'assets/img/bullet.png');
         this.load.tilemap('level2', 'assets/img/levelTwo.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('level1', 'assets/img/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
-        this.load.tilemap('level0', 'assets/img/spacetiles.json', null, Phaser.Tilemap.TILED_JSON);
-        this.load.image('tiles-0', 'assets/img/tiles/space_tiles.png', null, Phaser.Tilemap.TILED_JSON);
         this.load.image('tiles-1', 'assets/img/tiles/LevelOne.png');
         this.load.image('tiles-2', 'assets/img/tiles/LevelTwo.png');
         this.load.spritesheet('playership', 'assets/img/playership.png', 32, 48);
@@ -50,6 +48,7 @@ var BasicGame;
         //global variables
         
         BasicGame.currency = 0;
+        BasicGame.level = 1;
         
         
         this.load.spritesheet('explode','assets/img/explosion.png');

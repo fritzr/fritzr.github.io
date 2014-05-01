@@ -10,13 +10,12 @@ var BasicGame;
 (function (BasicGame) {
   	
 
-  var LevelTwo = (function (_super) {
-    __extends(LevelTwo, _super);
-    function LevelTwo() {
+  var LevelOne = (function (_super) {
+    __extends(LevelOne, _super);
+    function LevelOne() {
       _super.apply(this, arguments);
     }
     
-    var enemiesKilled = 0;
     var map;
     var tileset;
     var layer;
@@ -26,19 +25,21 @@ var BasicGame;
     var enemies = [];
     var bulletTime = 0;
     var stateText;
-    var explode_audio;
+    var button;
     var explode;
     var LOCATIONS = [
           [250,16],  [715,816], [780,656], [625,144],
           [975,665], [365,80],  [190,432], [420,958],
           [670,890], [465,960]
       ];
-    enemy = function (game, index1,index2, player, bullets) {
+    var wonGame = false;
+  enemy = function (game, index1,index2, player, bullets) {
    
-	  var x = [250, 715, 780, 625, 975, 365, 190, 420, 670, 465];
+	var x = [250, 715, 780, 625, 975, 365, 190, 420, 670, 465];
     var y = [16, 816, 656, 144, 665, 80, 432, 958, 890, 960];
       // how close to player enemy has to be to target the player
-    enemy.ACQUIRE_DISTANCE = 100;
+      enemy.ACQUIRE_DISTANCE = 100;
+
     this.game = game;
     this.player = player;
     this.bullets = bullets;
@@ -50,11 +51,15 @@ var BasicGame;
     game.physics.enable(this.ship, Phaser.Physics.ARCADE.Body);
     //this.ship.body.setRectangle(31, 31, 2, 9);
     this.ship.anchor.setTo(0.5, 0.5);
+    
+    this.ship.animations.add('fly');
+    this.ship.animations.play('fly', 10, true);
 
     //this.ship.name = index.toString();
     this.ship.body.immovable = false;
     this.ship.body.collideWorldBounds = true;
     this.ship.angle = game.rnd.angle();
+
     game.physics.arcade.velocityFromRotation(this.ship.rotation, 100, this.ship.body.velocity);
   };
 
@@ -86,7 +91,7 @@ var BasicGame;
 
     
     
-    LevelTwo.prototype.create = function () 
+    LevelOne.prototype.create = function () 
     {
 		      this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -95,11 +100,11 @@ var BasicGame;
           this.bg = this.game.add.tileSprite(0, 0, 3600, 2520, 'level1bg');
           this.bg.fixedToCamera = false;
 
-          this.map = this.game.add.tilemap('level2');
+          this.map = this.game.add.tilemap('level1');
 
-          this.map.addTilesetImage('tiles-2');
+          this.map.addTilesetImage('tiles-1');
 
-          this.map.setCollisionByExclusion([ 13, 14, 15, 16, 46, 47, 48, 49, 50, 51 ]);
+          this.map.setCollisionByExclusion([0]);
 
           this.layer = this.map.createLayer('Tile Layer 1');
 
@@ -112,6 +117,8 @@ var BasicGame;
           this.player.body.setSize(27, 27, 2, 9);
           this.player.anchor.setTo( 0.5, 0.5 );
           
+          //this.camera.follow(this.player);
+          
           bullets = this.game.add.group();
           bullets.createMultiple(1000, 'bullet');
           bullets.setAll('anchor.x', 0.5);
@@ -123,8 +130,7 @@ var BasicGame;
           enemyBullets.setAll('anchor.x', 0.5);
           enemyBullets.setAll('anchor.y', 0.5);
           enemyBullets.setAll('outOfBoundsKill', true);
-
-
+          
           enemies = [];
           for (var i = 0; i < LOCATIONS.length; i++){
             enemies.push(new enemy(this, 
@@ -135,16 +141,20 @@ var BasicGame;
 
           this.game.camera.follow(this.player);
           
-          stateText = this.game.add.text(150,100,'', { fontSize: '84px', fill: '#000000' });
+          stateText = this.game.add.text(150,100,'POOOOOOOO', { fontSize: '84px', fill: '#000000' });
           stateText.anchor.setTo(0.5, 0.5);
           stateText.visible = false;
           stateText.fixedToCamera = true;
-
+          
+          button = this.game.add.button(this.game.centerX, this.game.centerY, 'continue_button', this.endLevel, this, 2, 1, 0);
+          button.anchor.setTo(0.5,0.5);
+          button.fixedToCamera = true;
+          button.visible = false;
     };
 
-    LevelTwo.prototype.update = function()
+    LevelOne.prototype.update = function()
     {
-      	if(this.player.x > 960 && this.player.y > 960){
+      if(this.player.x > 960 && this.player.y > 960){
         this.stateText.content = " You Have Won! \n Click to restart";
         this.stateText.visible = true;
         this.game.input.onTap.addOnce(restart,this);
@@ -154,6 +164,15 @@ var BasicGame;
             this.player.body.x = 3;
             this.player.body.y = 180;
           }
+          
+          if(this.player.x >= 930){
+            stateText.setText("You Have Won!")
+            stateText.visible = true;
+            button.visible = true;
+            this.wonGame = true;
+          }
+          
+          //this.bg.tilePosition.y -= 6;
          
           this.player.rotation = this.game.physics.arcade.accelerateToPointer( this.player, this.game.input.activePointer, 200, 200, 200 );
 
@@ -176,15 +195,14 @@ var BasicGame;
           this.game.physics.arcade.overlap(bullets, this.layer, this.bulletHitLayer, null, this.layer); 
     };
 
-    LevelTwo.prototype.collider = function ()
+    LevelOne.prototype.collider = function ()
     {
       this.game.physics.arcade.collide(this.player, this.layer);
     };
 
-    LevelTwo.prototype.fireBullet = function ()
+    LevelOne.prototype.fireBullet = function ()
     {
         if (this.game.time.now > bulletTime){
-        	console.log(bulletTime);
           this.bullet = bullets.getFirstExists(false);
 		this.game.physics.arcade.enableBody(this.bullet);
         if (this.bullet){
@@ -192,16 +210,17 @@ var BasicGame;
           this.pew3.play();
           this.bullet.reset(this.player.x, this.player.y );
           this.bullet.body.velocity.y = -400;
-          bulletTime = this.game.time.now + BasicGame.playerFireRate;
+          this.bulletTime = this.game.time.now + 200;
           this.bullet.rotation = this.game.physics.arcade.moveToPointer(this.bullet, 300);
         }
       }
     };
 
-    LevelTwo.prototype.bulletHitEnemy = function (bullet,ship)
+    LevelOne.prototype.bulletHitEnemy = function (bullet,ship)
     {
-        this.explosion_audio = this.game.add.audio('explosion');
-        this.explosion_audio.play();
+        this.explosion = this.game.add.audio('explosion');
+        this.explosion = this.game.add.audio('explosion');
+        this.explosion.play();
 
          var explosion = this.game.add.sprite(ship.body.x,ship.body.y,'explode');
          explosion.anchor.setTo(0.5,0.5);
@@ -213,57 +232,59 @@ var BasicGame;
         ship.alive = false;
     };
 
-    LevelTwo.prototype.bulletHitLayer = function (bullet,Layer)
+    LevelOne.prototype.bulletHitLayer = function (bullet,Layer)
     {
       bullet.kill();
     };
     
-    LevelTwo.prototype.bulletHitPlayer = function (bullet,player)
+    LevelOne.prototype.bulletHitPlayer = function (bullet,player)
     {
-            this.explosion_audio = this.game.add.audio('explosion');
-            this.explosion_audio.play();
+      this.explosion = this.game.add.audio('explosion');
+      this.explosion.play();
 
-            var explosion = this.game.add.sprite(player.body.x,player.body.y,'explode');
-            explosion.anchor.setTo(0.5,0.5);
-            explosion.animations.add('explode');
-            explosion.play('explode',25,false,true);
+      var explosion = this.game.add.sprite(player.body.x,player.body.y,'explode');
+      explosion.anchor.setTo(0.5,0.5);
+      explosion.animations.add('explode');
+      explosion.play('explode',25,false,true);
 
-            bullet.kill();
-            player.kill();
-            
-            stateText.content = " You Have Failed! \n Click to restart";
-            stateText.visible = true;
-            this.game.state.start("LevelTwo");
-			//this.game.input.activePointer.onDown.add(this.restart, this.game);
-            //this.game.input.activePointer.onTap.addOnce(this.restart,this.game);
-
+      bullet.kill();
+      player.kill();
+      player.alive = false;
+      
+      stateText.setText("You Have Failed!\n Click to restart");
+      //stateText.visible = true;
+      //this.game.state.start("LevelOne");
+      //this.game.input.onTap.addOnce(restart,this);
+      button.visible = true;
     };
 
-    LevelTwo.prototype.resetBullet = function (bullet)
+    LevelOne.prototype.resetBullet = function (bullet)
     {
         bullet.kill();
     };
-
-    LevelTwo.prototype.restart = function ()
-    {
-    	this.game.state.start("LevelTwo");
-        //this.game.world.removeAll();
-        //preload();
-        //create();
-    };
     
-    GameState.prototype.win = function ()
-    {	
-    	this.stateText.content = "Congratulations! Score: " + enemiesKilled * (this.game.time.now/1000000);
-    	BasicGame.currency += enemiesKilled * (this.game.time.now/1000000);
-    	this.game.world.removeAll();
+    LevelOne.prototype.endLevel = function(){
+      console.log(this.wonGame);
+      if(!this.wonGame){
+        this.restart();
+      }else this.finished();
     }
     
-    
+    LevelOne.prototype.restart = function ()
+    {
+      this.game.world.removeAll();
+    	this.game.state.start("LevelTwo");
 
-    return LevelTwo;
+    };
+    
+    LevelOne.prototype.finished = function (){
+      BasicGame.level -= 1; // back to level 1
+      this.game.state.start("Upgrades");
+    }
+
+    return LevelOne;
   })(Phaser.State);
-  BasicGame.LevelTwo = LevelTwo;
+  BasicGame.LevelOne = LevelOne;
 
 
 

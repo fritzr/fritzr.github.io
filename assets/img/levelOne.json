@@ -19,12 +19,12 @@
  "tileheight":30,
  "tilesets":[
         {
-         "firstgid":0,
-         "image":"..\/tiles/LevelOne.png",
+         "firstgid":1,
+         "image":"..\/tiles\/levelOne.png",
          "imageheight":512,
          "imagewidth":512,
          "margin":0,
-         "name":"LevelOne",
+         "name":"levelOne",
          "properties":
             {
 

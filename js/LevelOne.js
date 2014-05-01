@@ -35,10 +35,10 @@ var BasicGame;
     var wonGame = false;
   enemy = function (game, index1,index2, player, bullets) {
    
-	var x = [250, 715, 780, 625, 975, 365, 190, 420, 670, 465];
+    var x = [250, 715, 780, 625, 975, 365, 190, 420, 670, 465];
     var y = [16, 816, 656, 144, 665, 80, 432, 958, 890, 960];
-      // how close to player enemy has to be to target the player
-      enemy.ACQUIRE_DISTANCE = 100;
+    // how close to player enemy has to be to target the player
+    enemy.ACQUIRE_DISTANCE = 100;
 
     this.game = game;
     this.player = player;
@@ -49,13 +49,12 @@ var BasicGame;
     this.explode = explode;
     this.ship = game.add.sprite(index1, index2, 'enemyship');
     game.physics.enable(this.ship, Phaser.Physics.ARCADE.Body);
-    //this.ship.body.setRectangle(31, 31, 2, 9);
+    this.ship.body.setSize(31, 31, 2, 9);
     this.ship.anchor.setTo(0.5, 0.5);
     
     this.ship.animations.add('fly');
     this.ship.animations.play('fly', 10, true);
 
-    //this.ship.name = index.toString();
     this.ship.body.immovable = false;
     this.ship.body.collideWorldBounds = true;
     this.ship.angle = game.rnd.angle();
@@ -94,30 +93,22 @@ var BasicGame;
     LevelOne.prototype.create = function () 
     {
 		      this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
           this.game.stage.backgroundColor = '#000000';
 
           this.bg = this.game.add.tileSprite(0, 0, 3600, 2520, 'level1bg');
           this.bg.fixedToCamera = false;
 
           this.map = this.game.add.tilemap('level1');
-
           this.map.addTilesetImage('tiles-1');
-
           this.map.setCollisionByExclusion([0]);
-
           this.layer = this.map.createLayer('Tile Layer 1');
-
           this.layer.resizeWorld();
-
 
           this.player = this.game.add.sprite(3, 180, 'playership');
           this.game.physics.arcade.enableBody(this.player);
           this.player.body.collideWorldBounds = true;
           this.player.body.setSize(27, 27, 2, 9);
           this.player.anchor.setTo( 0.5, 0.5 );
-          
-          //this.camera.follow(this.player);
           
           bullets = this.game.add.group();
           bullets.createMultiple(1000, 'bullet');
@@ -171,8 +162,6 @@ var BasicGame;
             button.visible = true;
             this.wonGame = true;
           }
-          
-          //this.bg.tilePosition.y -= 6;
          
           this.player.rotation = this.game.physics.arcade.accelerateToPointer( this.player, this.game.input.activePointer, 200, 200, 200 );
 
@@ -252,9 +241,6 @@ var BasicGame;
       player.alive = false;
       
       stateText.setText("You Have Failed!\n Click to restart");
-      //stateText.visible = true;
-      //this.game.state.start("LevelOne");
-      //this.game.input.onTap.addOnce(restart,this);
       button.visible = true;
     };
 
@@ -272,14 +258,12 @@ var BasicGame;
     
     LevelOne.prototype.restart = function ()
     {
+      this.game.world.removeAll();
     	this.game.state.start("LevelOne");
-        //this.game.world.removeAll();
-        //preload();
-        //create();
     };
     
     LevelOne.prototype.finished = function (){
-      BasicGame.Level += 1;
+      BasicGame.level += 1;
       this.game.state.start("Upgrades");
     }
 
