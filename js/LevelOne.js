@@ -38,7 +38,7 @@ var BasicGame;
 
     var LOCATIONS = [
           [80,432],  [208,80], [336,80], [464,80],
-          [848,560], [656,816], [208,368], [208,816]
+          [848,560], [656,816]
       ];
     var wonGame;
   enemy = function (game, index1,index2, player, bullets) {

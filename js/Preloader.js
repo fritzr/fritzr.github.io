@@ -26,6 +26,7 @@ var BasicGame;
         // load remaining game assets
         this.load.image("menu_bg", "assets/img/Background.jpg");
         this.load.image("level1bg", "assets/img/level1background.jpg");
+        this.load.image("level2bg", "assets/img/level2background.jpg");
         this.load.image("upgrade_background", "assets/img/upgradeBackground.jpg");
         this.load.audio("music_title", "assets/sound/title.mp3");
 

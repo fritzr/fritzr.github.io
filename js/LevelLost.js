@@ -32,7 +32,10 @@ var BasicGame;
     };
     
     LevelLost.prototype.toLevel = function () {
-      this.game.state.start('LevelOne');
+      if(BasicGame.level == 1){
+        this.game.state.start('LevelOne');
+      }
+      else this.game.state.start('LevelTwo');
     };
 
     return LevelLost;

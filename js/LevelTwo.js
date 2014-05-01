@@ -104,7 +104,7 @@ var BasicGame;
 		      this.game.physics.startSystem(Phaser.Physics.ARCADE);
           this.game.stage.backgroundColor = '#000000';
 
-          this.bg = this.game.add.tileSprite(0, 0, 3600, 2520, 'level1bg');
+          this.bg = this.game.add.tileSprite(0, 0, 1900, 1900, 'level2bg');
           this.bg.fixedToCamera = false;
 
           this.map = this.game.add.tilemap('level2');
@@ -169,6 +169,7 @@ var BasicGame;
           	score = 2000 + (enemiesKilled*500) - (currentTime - startTime)/100000;
       		  BasicGame.currency += score/1000;
             this.wonGame = true;
+            
             this.game.state.start('levelWon');
           }
          
