@@ -27,6 +27,7 @@ var BasicGame;
     var stateText;
     var button;
     var explode;
+    var enemiesKilled = 0;
     var LOCATIONS = [
           [250,16],  [715,816], [780,656], [625,144],
           [975,665], [365,80],  [190,432], [420,958],
@@ -163,7 +164,7 @@ var BasicGame;
             this.wonGame = true;
           }
          
-          this.player.rotation = this.game.physics.arcade.accelerateToPointer( this.player, this.game.input.activePointer, 200, 200, 200 );
+          this.player.rotation = this.game.physics.arcade.accelerateToPointer( this.player, this.game.input.activePointer, 200, 100, 100 );
 
           if (this.game.input.activePointer.isDown){
               this.fireBullet();
@@ -210,7 +211,7 @@ var BasicGame;
         this.explosion = this.game.add.audio('explosion');
         this.explosion = this.game.add.audio('explosion');
         this.explosion.play();
-
+		enemiesKilled += 1;
          var explosion = this.game.add.sprite(ship.body.x,ship.body.y,'explode');
          explosion.anchor.setTo(0.5,0.5);
          explosion.animations.add('explode');
