@@ -21,7 +21,7 @@ var BasicGame;
       	this.backButton = this.add.button(50, 50, 'credits_button', this.backToMenu, this, 1,0,1);
         var i = 0;
         var text = "Credits:\nDamian O'Leary\nDrew Schilthelm\nFritz Reese\nWes Chappell";
-    	var style = { font: "65px Arial", fill: "#FCFF00", align: "center" };
+    	var style = { font: "65px Helvetica Neue UltraLight", fill: "#FCFF00", align: "center" };
 
     	var t = this.add.text(this.world.centerX, this.world.centerY-100, text, style);
     	

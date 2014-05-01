@@ -21,7 +21,7 @@ var BasicGame;
       	this.backButton = this.add.button(50, 50, 'controls_button', this.backToMenu, this, 1,0,1);
         var i = 0;
         var text = "Controls:\nControl Direction by moving mouse\nClick to fire";
-    	var style = { font: "45px Arial", fill: "#FCFF00", align: "center" };
+    	var style = { font: "45px Helvetica Neue UltraLight", fill: "#FCFF00", align: "center" };
 
     	var t = this.add.text(this.world.centerX-250, this.world.centerY+75, text, style);
     	
