@@ -168,13 +168,13 @@ var BasicGame;
           if(this.player.x >= 930){
           	var currentTime = this.game.time.now;
           	score = 2000 + (enemiesKilled*500) - (currentTime - startTime)/100000;
-      		  BasicGame.currency += score/1000;
+      		  BasicGame.currency += score;
             this.wonGame = true;
             BasicGame.level += 1;
             this.game.state.start('LevelWon');
           }
          
-          this.player.rotation = this.game.physics.arcade.accelerateToPointer( this.player, this.game.input.activePointer, 200, 100, 100 );
+          this.player.rotation = this.game.physics.arcade.accelerateToPointer( this.player, this.game.input.activePointer, 200, 200, 100 );
 
           if (this.game.input.activePointer.isDown){
               this.fireBullet();
