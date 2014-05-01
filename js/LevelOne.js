@@ -101,6 +101,9 @@ var BasicGame;
           this.bg = this.game.add.tileSprite(0, 0, 3600, 2520, 'level1bg');
           this.bg.fixedToCamera = false;
 
+          // for setting up field of vision
+          this.createLightBitmaps();
+
           this.map = this.game.add.tilemap('level1');
           this.map.addTilesetImage('tiles-1');
           this.map.setCollisionByExclusion([0]);
@@ -150,6 +153,9 @@ var BasicGame;
 
     LevelOne.prototype.update = function()
     {
+      // draw field of vision
+      this.updateVision();
+      
       if(this.player.x > 960 && this.player.y > 960){
       	
         this.stateText.content = " You Have Won! Click to restart \n XP: " + score;
@@ -274,6 +280,119 @@ var BasicGame;
       BasicGame.level += 1;
       this.game.state.start("Upgrades");
     }
+
+// how far can you see
+var SIGHT_RADIUS = 200;
+
+LevelOne.prototype.createLightBitmaps = function() {
+    // Create a bitmap texture for drawing light cones
+    this.bitmap = this.game.add.bitmapData(this.game.width, this.game.height);
+    this.bitmap.context.fillStyle = 'rgb(255, 255, 255)';
+    this.bitmap.context.strokeStyle = 'rgb(255, 255, 255)';
+    var lightBitmap = this.game.add.image(0, 0, this.bitmap);
+
+    // This bitmap is drawn onto the screen using the MULTIPLY blend mode.
+    // Since this bitmap is over the background, dark areas of the bitmap
+    // will make the background darker. White areas of the bitmap will allow
+    // the normal colors of the background to show through. Blend modes are
+    // only supported in WebGL. If your browser doesn't support WebGL then
+    // you'll see gray shadows and white light instead of colors and it
+    // generally won't look nearly as cool. So use a browser with WebGL.
+    lightBitmap.blendMode = Phaser.blendModes.MULTIPLY;
+}
+
+// The update() method is called every frame
+LevelOne.prototype.updateVision = function() {
+    // Fill the entire light bitmap with a dark shadow color.
+    this.bitmap.context.fillStyle = 'rgb(15, 15, 15)';
+    this.bitmap.context.fillRect(0, 0,
+            this.game.world.width, this.game.world.height);
+
+    // Ray casting!
+    // Cast rays at intervals in a large circle around the light.
+    // Save all of the intersection points up to the sight radius
+    var points = [this.player];
+    for(var a = this.player.rotation;
+            a < this.player.rotation + Math.PI / 3;
+            a += Math.PI/180) {
+        // Create a ray from the player to a point on the circle
+        var ray = new Phaser.Line(
+            this.player.x, this.player.y,
+            this.player.x + Math.cos(a) * SIGHT_RADIUS,
+            this.player.y + Math.sin(a) * SIGHT_RADIUS);
+
+        // Returns sight radius along the ray, or end of the sight radius
+        points.push(this.getEndPoint(ray));
+    }
+
+    // Use light to dark gradient
+    var gradient = this.bitmap.context.createRadialGradient(
+        points[0].x, points[0].y, SIGHT_RADIUS * 0.6,
+        points[0].x, points[0].y, SIGHT_RADIUS);
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+    gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+
+    // Connect the dots and fill in the shape, which are cones of light,
+    // with a bright white color. When multiplied with the background,
+    // the white color will allow the full color of the background to
+    // shine through.
+    this.bitmap.context.beginPath();
+    this.bitmap.context.fillStyle = gradient; //'rgb(255, 255, 255)';
+    this.bitmap.context.moveTo(points[0].x, points[0].y);
+    for(var j = 0; j < points.length-1; j++) {
+        this.bitmap.context.lineTo(points[j].x, points[j].y);
+    }
+    this.bitmap.context.closePath();
+    this.bitmap.context.fill();
+
+    // This just tells the engine it should update the texture cache
+    this.bitmap.dirty = true;
+};
+
+LevelOne.prototype.nearbyTiles = function(object) {
+    return this.layer.getTiles(object.x-SIGHT_RADIUS, object.y-SIGHT_RADIUS,
+                               2*SIGHT_RADIUS, 2*SIGHT_RADIUS, true);
+};
+
+// Given a ray, this function iterates through all of the walls and
+// returns the closest wall intersection from the start of the ray
+// or null if the ray does not intersect any walls.
+LevelOne.prototype.getEndPoint = function(ray) {
+    var distanceToWall = SIGHT_RADIUS;
+    var closestIntersection = ray.end;
+
+    // For each of the walls...
+    this.nearbyTiles(this.player).forEach(function(wall) {
+        // Create an array of lines that represent the four edges of each wall
+        var lines = [
+            new Phaser.Line(wall.worldX, wall.worldY,
+                wall.worldX + wall.width, wall.worldY),
+            new Phaser.Line(wall.worldX, wall.worldY,
+                wall.worldX, wall.worldY + wall.height),
+            new Phaser.Line(wall.worldX + wall.width, wall.worldY,
+                wall.worldX + wall.width, wall.worldY + wall.height),
+            new Phaser.Line(wall.worldX, wall.worldY + wall.height,
+                wall.worldX + wall.width, wall.worldY + wall.height)
+        ];
+
+        // Test each of the edges in this wall against the ray.
+        // If the ray intersects any of the edges then the wall must be in the way.
+        for(var i = 0; i < lines.length; i++) {
+            var intersect = Phaser.Line.intersects(ray, lines[i]);
+            if (intersect) {
+                // Find the closest intersection
+                distance =
+                    this.game.math.distance(ray.start.x, ray.start.y, intersect.x, intersect.y);
+                if (distance < distanceToWall) {
+                    distanceToWall = distance;
+                    closestIntersection = intersect;
+                }
+            }
+        }
+    }, this);
+
+    return closestIntersection;
+};
 
     return LevelOne;
   })(Phaser.State);
