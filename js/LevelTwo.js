@@ -299,6 +299,19 @@ LevelTwo.prototype.updateVision = function() {
     this.bitmap.context.fillRect(0, 0,
             this.game.world.bounds.width, this.game.world.bounds.height);
 
+    // darken out-of-range enemy ships
+    enemies.forEach(function(enmy) {
+        var distance = this.game.math.distance(enmy.ship.x, enmy.ship.y,
+                                               this.player.x,this.player.y);
+        // enemies get easier to see when they're closer
+        if(distance > LIGHT_DEPTH) {
+            enmy.ship.alpha = 0;
+        } else {
+            enmy.ship.alpha = Math.exp(-2.5*(distance/LIGHT_DEPTH));
+        }
+    }, this);
+
+            
     // don't draw flashlight if player is dead!
     if(!this.player.alive)
         return;
