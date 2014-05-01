@@ -31,7 +31,7 @@ var BasicGame;
 
     };
     
-    MainMenu.prototype.update = function(){
+    MainMenu.prototype.ContinueGame = function(){
       this.music.stop();
       if(BasicGame.level == 1)
         this.game.state.start('LevelOne');
