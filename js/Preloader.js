@@ -49,6 +49,9 @@ var BasicGame;
         BasicGame.currency = 0;
         BasicGame.level = 1;
         BasicGame.playerFireRate = 200;
+        BasicGame.FireRateUpgrade1 = 0;
+        BasicGame.FireRateUpgrade2 = 0;
+        BasicGame.FireRateUpgrade3 = 0;
         
         this.load.spritesheet("continue_button", "assets/img/Buttons/Continue.png", 200, 50);
         this.load.spritesheet("controls_button", "assets/img/Buttons/Controls.png", 200, 50);

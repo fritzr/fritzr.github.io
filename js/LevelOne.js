@@ -28,6 +28,8 @@ var BasicGame;
     var button;
     var explode;
     var enemiesKilled = 0;
+    var startTime = 0;
+    var score = 0;
     var LOCATIONS = [
           [250,16],  [715,816], [780,656], [625,144],
           [975,665], [365,80],  [190,432], [420,958],
@@ -142,12 +144,15 @@ var BasicGame;
           button.anchor.setTo(0.5,0.5);
           button.fixedToCamera = true;
           button.visible = false;
+          
+          startTime = this.game.time.now;
     };
 
     LevelOne.prototype.update = function()
     {
       if(this.player.x > 960 && this.player.y > 960){
-        this.stateText.content = " You Have Won! \n Click to restart";
+      	
+        this.stateText.content = " You Have Won! Click to restart \n XP: " + score;
         this.stateText.visible = true;
         this.game.input.onTap.addOnce(restart,this);
           }
@@ -158,7 +163,10 @@ var BasicGame;
           }
           
           if(this.player.x >= 930){
-            stateText.setText("You Have Won!")
+          	var currentTime = this.game.time.now;
+          	score = (enemiesKilled*500) - (currentTime - startTime)/100000;
+      		BasicGame.currency += score;
+            stateText.setText("You Have Won!\n XP: " + score);
             stateText.visible = true;
             button.visible = true;
             this.wonGame = true;
