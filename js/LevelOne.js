@@ -36,6 +36,7 @@ var BasicGame;
           [670,890], [465,960]
       ];
     var wonGame;
+    var lightVal;
   enemy = function (game, index1,index2, player, bullets) {
    
     var x = [250, 715, 780, 625, 975, 365, 190, 420, 670, 465];
@@ -256,6 +257,8 @@ var BasicGame;
       bullet.kill();
       player.kill();
       player.alive = false;
+      
+      lightVal = BasicGame.playerLight;
       BasicGame.playerLight = 180;
       
       stateText.setText("You Have Failed!\n Click to restart");
@@ -268,6 +271,7 @@ var BasicGame;
     };
     
     LevelOne.prototype.endLevel = function(){
+    BasicGame.playerLight = lightVal;
       if(!this.wonGame){
         this.restart();
       }else this.finished();
