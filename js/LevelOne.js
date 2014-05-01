@@ -32,7 +32,7 @@ var BasicGame;
     var score = 0;
 
     var LIGHT_PEN   = 20; // how far light penetrates into walls
-    var LIGHT_DEPTH = 200; // how far you can see
+    var LIGHT_DEPTH = 300; // how far you can see
     var LIGHT_ANGLE = 60; // angle of the flashlight in degrees
     var LIGHT_RADS  = LIGHT_ANGLE*Math.PI/180; // angle in radians
 
