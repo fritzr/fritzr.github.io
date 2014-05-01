@@ -63,6 +63,7 @@ var BasicGame;
         this.load.spritesheet("credits_button", "assets/img/Buttons/Credits.png", 200, 50);
         this.load.spritesheet("newgame_button", "assets/img/Buttons/NewGame.png", 200, 50);
         this.load.spritesheet("upgrades_button", "assets/img/Buttons/Upgrades.png", 200, 50);
+        this.load.spritesheet("restart_button", "assets/img/Buttons/Restart.png", 200, 50);
         this.load.spritesheet('explode','assets/img/explosion.png',50,50);
     };
 

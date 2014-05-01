@@ -250,7 +250,6 @@ var BasicGame;
       bullet.kill();
       player.kill();
       player.alive = false;
-      BasicGame.level += 1;
       this.game.state.start('LevelLost');
     };
 

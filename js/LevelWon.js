@@ -20,8 +20,9 @@ var BasicGame;
         background.scale.setTo(0.65, 0.75);
       	this.continuebutton = this.add.button(700, 0, 'continue_button', this.toUpgrades, this, 1,0,1);
       
-      stateText = this.game.add.text(150,100,'Level ' + BasicGame.level + ' Complete!\nTotal Score: ' + BasicGame.currency, { fontSize: '84px', fill: '#000000' });
+      stateText = this.add.text(512,288,'Level ' + BasicGame.level + ' Complete!\nTotal Score: ' + BasicGame.currency, { fontSize: '84px', fill: '#FFFFFF' });
       stateText.anchor.setTo(0.5, 0.5);
+      stateText.visible = true;
       stateText.fixedToCamera = true;
     };
 
