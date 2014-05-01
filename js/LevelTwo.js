@@ -144,11 +144,6 @@ var BasicGame;
 
           this.game.camera.follow(this.player);
           
-          stateText = this.game.add.text(150,100,'POOOOOOOO', { fontSize: '84px', fill: '#000000' });
-          stateText.anchor.setTo(0.5, 0.5);
-          stateText.visible = false;
-          stateText.fixedToCamera = true;
-          
           startTime = this.game.time.now;
           endTime = 0;
           wonGame = false;
@@ -164,10 +159,10 @@ var BasicGame;
             this.player.body.y = 100;
           }
           
-          if(this.player.x >= 960){
+          if(this.player.y >= 1580{
           	var currentTime = this.game.time.now;
-          	score = 2000 + (enemiesKilled*500) - (currentTime - startTime)/100000;
-      		  BasicGame.currency += score/1000;
+          	score = 20 + (enemiesKilled*50) - (currentTime - startTime)/10000000;
+      		  BasicGame.currency += score/10;
             this.wonGame = true;
             
             this.game.state.start('levelWon');
