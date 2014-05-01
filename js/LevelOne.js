@@ -120,6 +120,8 @@ var BasicGame;
           this.player.body.collideWorldBounds = true;
           this.player.body.setSize(27, 27, 2, 9);
           this.player.anchor.setTo( 0.5, 0.5 );
+          this.player.animations.add('fly');
+          this.player.animations.play('fly', 10, true);
           
           bullets = this.game.add.group();
           bullets.createMultiple(1000, 'bullet');

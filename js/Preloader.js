@@ -36,7 +36,7 @@ var BasicGame;
         this.load.tilemap('level1', 'assets/img/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.image('tiles-1', 'assets/img/tiles/LevelOne.png');
         this.load.image('tiles-2', 'assets/img/tiles/LevelTwo.png');
-        this.load.spritesheet('playership', 'assets/img/playership.png', 32, 48);
+        this.load.spritesheet('playership', 'assets/img/playership.png', 29, 27);
         this.load.spritesheet('enemyship', 'assets/img/enemyship.png', 27, 30);
         this.load.image('background', 'assets/img/Background.jpg');
         this.load.audio('pew3', 'assets/sound/pew3.ogg');
