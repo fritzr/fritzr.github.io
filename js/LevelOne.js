@@ -297,9 +297,20 @@ LevelOne.prototype.updateVision = function() {
     this.bitmap.context.fillRect(0, 0,
             this.game.world.bounds.width, this.game.world.bounds.height);
 
-    // don't draw flashlight if player is dead!
-    if(!this.player.alive)
-        return;
+    // Use light to dark gradient
+    var gradient = this.bitmap.context.createRadialGradient(
+        this.player.x, this.player.y, LIGHT_DEPTH * 0.2,
+        this.player.x, this.player.y, LIGHT_DEPTH);
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+    gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+
+    // when player is dead, draw glow around wreckage
+    if(!this.player.alive) {
+        this.bitmap.context.beginPath();
+        this.bitmap.context.fillStyle = gradient;
+        this.bitmap.context.arc(this.player.x, this.player.y,
+                                this.LIGHT_DEPTH, 0, Math.PI*2);
+    } else {
 
     // Ray casting!
     // Cast rays at intervals in a large circle around the light.
@@ -318,13 +329,6 @@ LevelOne.prototype.updateVision = function() {
         points.push(this.getEndPoint(ray));
     }
 
-    // Use light to dark gradient
-    var gradient = this.bitmap.context.createRadialGradient(
-        points[0].x, points[0].y, LIGHT_DEPTH * 0.2,
-        points[0].x, points[0].y, LIGHT_DEPTH);
-    gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
-    gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
-
     // Connect the dots and fill in the shape, which are cones of light,
     // with a bright white color. When multiplied with the background,
     // the white color will allow the full color of the background to
@@ -335,11 +339,14 @@ LevelOne.prototype.updateVision = function() {
     for(var j = 0; j < points.length-1; j++) {
         this.bitmap.context.lineTo(points[j].x, points[j].y);
     }
-    this.bitmap.context.closePath();
-    this.bitmap.context.fill();
+
+    }
 
     // This just tells the engine it should update the texture cache
+    this.bitmap.context.closePath();
+    this.bitmap.context.fill();
     this.bitmap.dirty = true;
+
 };
 
 LevelOne.prototype.nearbyTiles = function(object) {
