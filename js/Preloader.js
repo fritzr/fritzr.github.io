@@ -28,7 +28,7 @@ var BasicGame;
         this.load.image("level1bg", "assets/img/level1background.jpg");
         this.load.image("level2bg", "assets/img/level2background.jpg");
         this.load.image("upgrade_background", "assets/img/upgradeBackground.jpg");
-        this.load.audio("music_title", "assets/sound/title.mp3");
+        this.load.audio("music_title", "assets/sound/title.ogg");
 
         this.load.spritesheet("player_ship", "assets/img/playership.png");
         this.load.spritesheet("enemy_ship", "assets/img/enemyship.png");
