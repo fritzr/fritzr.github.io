@@ -297,20 +297,30 @@ LevelOne.prototype.updateVision = function() {
     this.bitmap.context.fillRect(0, 0,
             this.game.world.bounds.width, this.game.world.bounds.height);
 
-    // Use light to dark gradient
-    var gradient = this.bitmap.context.createRadialGradient(
-        this.player.x, this.player.y, LIGHT_DEPTH * 0.2,
-        this.player.x, this.player.y, LIGHT_DEPTH);
-    gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
-    gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
 
     // when player is dead, draw glow around wreckage
     if(!this.player.alive) {
+        // Use light to dark gradient
+        var gradient = this.bitmap.context.createRadialGradient(
+            this.player.x, this.player.y, LIGHT_DEPTH * 0.2,
+            this.player.x, this.player.y, LIGHT_DEPTH/2
+                + this.game.rnd.integerInRange(1,LIGHT_PEN/2));
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+
         this.bitmap.context.beginPath();
         this.bitmap.context.fillStyle = gradient;
         this.bitmap.context.arc(this.player.x, this.player.y,
-                                this.LIGHT_DEPTH, 0, Math.PI*2);
+                                LIGHT_DEPTH/2, 0, Math.PI*2);
     } else {
+    // Use light to dark gradient
+    var gradient = this.bitmap.context.createRadialGradient(
+        this.player.x, this.player.y, LIGHT_DEPTH * 0.2,
+        this.player.x, this.player.y, LIGHT_DEPTH 
+            + this.game.rnd.integerInRange(1,LIGHT_PEN));
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+    gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+
 
     // Ray casting!
     // Cast rays at intervals in a large circle around the light.
