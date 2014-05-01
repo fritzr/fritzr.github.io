@@ -221,6 +221,11 @@ var BasicGame;
         this.explosion = this.game.add.audio('explosion');
         this.explosion = this.game.add.audio('explosion');
         this.explosion.play();
+
+         var explosion = this.game.add.sprite(ship.body.x,ship.body.y,'explode');
+         explosion.animations.add('explode');
+         explosion.play('explode',25,false,true);
+
         bullet.kill();
         ship.kill();
         ship.alive = false;
@@ -235,6 +240,11 @@ var BasicGame;
     {
       this.explosion = this.game.add.audio('explosion');
       this.explosion.play();
+
+      var explosion = this.game.add.sprite(player.body.x,player.body.y,'explode');
+      explosion.animations.add('explode');
+      explosion.play('explode',25,false,true);
+
       bullet.kill();
       player.kill();
       player.alive = false;
