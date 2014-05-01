@@ -159,9 +159,9 @@ var BasicGame;
             this.player.body.y = 100;
           }
           
-          if(this.player.y >= 1580{
+          if(this.player.y >= 1536){
           	var currentTime = this.game.time.now;
-          	score = 20 + (enemiesKilled*50) - (currentTime - startTime)/10000000;
+          	score = Math.round(20 + (enemiesKilled*50) - (currentTime - startTime)/10000000);
       		  BasicGame.currency += score/10;
             this.wonGame = true;
             

@@ -162,7 +162,7 @@ var BasicGame;
           
           if(this.player.x >= 930){
           	var currentTime = this.game.time.now;
-          	score = 20 + (enemiesKilled*5) - (currentTime - startTime)/10000000;
+          	score = Math.round(20 + (enemiesKilled*5) - (currentTime - startTime)/10000000);
       		  BasicGame.currency += score;
             this.wonGame = true;
             BasicGame.level += 1;

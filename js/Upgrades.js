@@ -58,7 +58,7 @@ var BasicGame;
     };
 
     Upgrades.prototype.update = function() {
-      this.currencyLbl.updateText('Total Parts: ' + BasicGame.currency);
+      this.currencyLbl.setText('Total Parts: ' + BasicGame.currency);
     };
     
     Upgrades.prototype.FirstLight = function(){
