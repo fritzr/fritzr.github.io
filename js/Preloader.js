@@ -19,7 +19,7 @@ var BasicGame;
         // show preload assets
         this.background = this.add.image(0, 0, "load_bg");
         this.preloadBar = this.add.sprite(this.game.width/2,
-        this.game.height/2, "load_bar");
+        (this.game.height/2) + 200, "load_bar");
         this.preloadBar.anchor.setTo(0.5, 0.5);
         this.load.setPreloadSprite(this.preloadBar);
 

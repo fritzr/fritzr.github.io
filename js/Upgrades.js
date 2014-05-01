@@ -38,11 +38,14 @@ var BasicGame;
 		this.fr3Button.frame = BasicGame.FireRateUpgrade3;
 		
 		this.lrButton1 = this.add.button(400, 325, 'upgradeButton', this.FirstLight, this);
+		this.lrButton1.frame = BasicGame.LightUpgrade1;
 		this.lrButton2 = this.add.button(600, 325, 'upgradeButton', this.SecondLight, this);
+		this.lrButton2.frame = BasicGame.LightUpgrade2;
 		this.lrButton3 = this.add.button(800, 325, 'upgradeButton', this.ThirdLight, this);
-		var lr11Label = this.add.text(400, 400, 'x1.5 Range \nCost: 5,000', style2);
-		var lr2Label = this.add.text(600, 400, 'x2 Range \nCost: 10,000', style2);
-		var lr3Label = this.add.text(800, 400, 'x2.5 Fire Rate \nCost: 15,000', style2);
+		this.lrButton3.frame = BasicGame.LightUpgrade3;
+		var lr11Label = this.add.text(400, 400, 'x1.5 Range \nCost: 2,000', style2);
+		var lr2Label = this.add.text(600, 400, 'x2 Range \nCost: 5,000', style2);
+		var lr3Label = this.add.text(800, 400, 'x2.5 Fire Rate \nCost: 10,000', style2);
 		
 		var fr1Label = this.add.text(400, 275, 'x2 Fire Rate \nCost: 2,000', style2);
 		var fr2Label = this.add.text(600, 275, 'x4 Fire Rate \nCost: 10,000', style2);
@@ -55,6 +58,30 @@ var BasicGame;
     Upgrades.prototype.update = function() {
 
     };
+    
+    Upgrades.prototype.FirstLight = function(){
+    	if(BasicGame.currency >= 2000){
+    		BasicGame.playerLight = 16;
+    		this.lrButton1.frame = 1;
+    		BasicGame.LightUpgrade1 = 1;
+    	}
+    }
+    
+    Upgrades.prototype.SecondLight = function(){
+    	if(BasicGame.currency >= 5000){
+    		BasicGame.playerLight = 25;
+    		this.lrButton2.frame = 1;
+    		BasicGame.LightUpgrade2 = 1;
+    	}
+    }
+    
+    Upgrades.prototype.ThirdLight = function(){
+    	if(BasicGame.currency >= 10000){
+    		BasicGame.playerLight = 32;
+    		this.lrButton3.frame = 1;
+    		BasicGame.LightUpgrade3 = 1;
+    	}
+    }
     
     Upgrades.prototype.FirstUpgrade = function(){
     	if(BasicGame.currency >= 2000){
