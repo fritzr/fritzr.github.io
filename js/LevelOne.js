@@ -101,14 +101,14 @@ var BasicGame;
           this.bg = this.game.add.tileSprite(0, 0, 3600, 2520, 'level1bg');
           this.bg.fixedToCamera = false;
 
-          // for setting up field of vision
-          this.createLightBitmaps();
-
           this.map = this.game.add.tilemap('level1');
           this.map.addTilesetImage('tiles-1');
           this.map.setCollisionByExclusion([0]);
           this.layer = this.map.createLayer('Tile Layer 1');
           this.layer.resizeWorld();
+
+          // for setting up field of vision
+          this.createLightBitmaps();
 
           this.player = this.game.add.sprite(3, 180, 'playership');
           this.game.physics.arcade.enableBody(this.player);
@@ -289,7 +289,8 @@ var SIGHT_RADIUS = 200;
 
 LevelOne.prototype.createLightBitmaps = function() {
     // Create a bitmap texture for drawing light cones
-    this.bitmap = this.game.add.bitmapData(this.game.width, this.game.height);
+    this.bitmap = this.game.add.bitmapData(this.game.world.bounds.width,
+                                           this.game.world.bounds.height);
     this.bitmap.context.fillStyle = 'rgb(255, 255, 255)';
     this.bitmap.context.strokeStyle = 'rgb(255, 255, 255)';
     var lightBitmap = this.game.add.image(0, 0, this.bitmap);
@@ -309,7 +310,7 @@ LevelOne.prototype.updateVision = function() {
     // Fill the entire light bitmap with a dark shadow color.
     this.bitmap.context.fillStyle = 'rgb(15, 15, 15)';
     this.bitmap.context.fillRect(0, 0,
-            this.game.world.width, this.game.world.height);
+            this.game.world.bounds.width, this.game.world.bounds.height);
 
     // Ray casting!
     // Cast rays at intervals in a large circle around the light.
