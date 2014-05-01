@@ -149,6 +149,8 @@ var BasicGame;
           button.visible = false;
           
           startTime = this.game.time.now;
+          endTime = 0;
+          wonGame = false;
     };
 
     LevelOne.prototype.update = function()
