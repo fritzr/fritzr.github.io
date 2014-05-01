@@ -37,10 +37,17 @@ var BasicGame;
 		this.fr3Button = this.add.button(800, 200, 'upgradeButton', this.ThirdUpgrade, this);
 		this.fr3Button.frame = BasicGame.FireRateUpgrade3;
 		
+		this.lrButton1 = this.add.button(400, 325, 'upgradeButton', this.FirstLight, this);
+		this.lrButton2 = this.add.button(600, 325, 'upgradeButton', this.SecondLight, this);
+		this.lrButton3 = this.add.button(800, 325, 'upgradeButton', this.ThirdLight, this);
+		var lr11Label = this.add.text(400, 400, 'x1.5 Range \nCost: 5,000', style2);
+		var lr2Label = this.add.text(600, 400, 'x2 Range \nCost: 10,000', style2);
+		var lr3Label = this.add.text(800, 400, 'x2.5 Fire Rate \nCost: 15,000', style2);
+		
 		var fr1Label = this.add.text(400, 275, 'x2 Fire Rate \nCost: 2,000', style2);
 		var fr2Label = this.add.text(600, 275, 'x4 Fire Rate \nCost: 10,000', style2);
 		var fr3Label = this.add.text(800, 275, 'Infinite Fire Rate \nCost: 50,000', style2);		
-		var LightLabel = this.add.text(50, 400, "Light Distance:", style);
+		var LightLabel = this.add.text(50, 350, "Light Distance:", style);
     	var t = this.add.text(this.world.centerX-300, 0, text, style);
     	
     };
