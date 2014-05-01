@@ -111,7 +111,7 @@ var BasicGame;
           // for setting up field of vision
           this.createLightBitmaps();
 
-          this.player = this.game.add.sprite(3, 180, 'playership');
+          this.player = this.game.add.sprite(75, 32, 'playership');
           this.game.physics.arcade.enableBody(this.player);
           this.player.body.collideWorldBounds = true;
           this.player.body.setSize(27, 27, 2, 9);
