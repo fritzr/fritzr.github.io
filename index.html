@@ -13,6 +13,7 @@
     <script src="js/Credits.js"></script>
     <script src="js/Controls.js"></script>
     <script src="js/LevelWon.js"></script>
+    <script src="js/LevelLost.js"></script>
 </head>
 <body>
     <b> SPACE MAZE 2014 DELUXE </b>
@@ -37,6 +38,7 @@
             game.state.add('Credits', BasicGame.Credits);
             game.state.add('Controls', BasicGame.Controls);
             game.state.add('LevelWon', BasicGame.LevelWon);
+            game.state.add('LevelLost', BasicGame.LevelLost);
             game.state.start('Boot');
         }
     </script>

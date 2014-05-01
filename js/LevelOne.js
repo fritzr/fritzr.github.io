@@ -149,11 +149,6 @@ var BasicGame;
           stateText.visible = false;
           stateText.fixedToCamera = true;
           
-          button = this.game.add.button(412, 213, 'continue_button', this.endLevel, this, 2, 1, 0);
-          button.anchor.setTo(0.5,0.5);
-          button.fixedToCamera = true;
-          button.visible = false;
-          
           startTime = this.game.time.now;
           endTime = 0;
           wonGame = false;
@@ -173,11 +168,8 @@ var BasicGame;
           	var currentTime = this.game.time.now;
           	score = 1000 + (enemiesKilled*500) - (currentTime - startTime)/100000;
       		  BasicGame.currency += score/1000;
-            stateText.setText("You Have Won!\n XP: " + score);
-            stateText.visible = true;
-            button.visible = true;
             this.wonGame = true;
-            this.game.state.start('LevelWon');
+            this.game.state.start('levelWon');
           }
          
           this.player.rotation = this.game.physics.arcade.accelerateToPointer( this.player, this.game.input.activePointer, 200, 100, 100 );
@@ -256,9 +248,7 @@ var BasicGame;
       bullet.kill();
       player.kill();
       player.alive = false;
-      
-      stateText.setText("You Have Failed!\n Click to restart");
-      button.visible = true;
+      this.game.state.start('LevelLost');
     };
 
     LevelOne.prototype.resetBullet = function (bullet)
