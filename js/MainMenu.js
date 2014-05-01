@@ -41,6 +41,12 @@ var BasicGame;
     
     MainMenu.prototype.startGame = function () {
       this.music.stop();
+        BasicGame.currency = 0;
+        BasicGame.level = 1;
+        BasicGame.playerFireRate = 200;
+        BasicGame.FireRateUpgrade1 = 0;
+        BasicGame.FireRateUpgrade2 = 0;
+        BasicGame.FireRateUpgrade3 = 0;
       this.game.state.start("LevelOne");
     };
     
