@@ -30,13 +30,18 @@ var BasicGame;
     var enemiesKilled = 0;
     var startTime = 0;
     var score = 0;
+
+    var LIGHT_PEN   = 20; // how far light penetrates into walls
+    var LIGHT_DEPTH = 200; // how far you can see
+    var LIGHT_ANGLE = 60; // angle of the flashlight in degrees
+    var LIGHT_RADS  = LIGHT_ANGLE*Math.PI/180; // angle in radians
+
     var LOCATIONS = [
           [250,16],  [715,816], [780,656], [625,144],
           [975,665], [365,80],  [190,432], [420,958],
           [670,890], [465,960]
       ];
     var wonGame;
-    var lightVal;
   enemy = function (game, index1,index2, player, bullets) {
    
     var x = [250, 715, 780, 625, 975, 365, 190, 420, 670, 465];
@@ -258,9 +263,6 @@ var BasicGame;
       player.kill();
       player.alive = false;
       
-      lightVal = BasicGame.playerLight;
-      BasicGame.playerLight = 180;
-      
       stateText.setText("You Have Failed!\n Click to restart");
       button.visible = true;
     };
@@ -271,7 +273,6 @@ var BasicGame;
     };
     
     LevelOne.prototype.endLevel = function(){
-    BasicGame.playerLight = lightVal;
       if(!this.wonGame){
         this.restart();
       }else this.finished();
@@ -287,9 +288,6 @@ var BasicGame;
       BasicGame.level += 1;
       this.game.state.start("Upgrades");
     }
-
-// how far can you see
-var SIGHT_RADIUS = 200;
 
 LevelOne.prototype.createLightBitmaps = function() {
     // Create a bitmap texture for drawing light cones
@@ -312,7 +310,7 @@ LevelOne.prototype.createLightBitmaps = function() {
 // The update() method is called every frame
 LevelOne.prototype.updateVision = function() {
     // Fill the entire light bitmap with a dark shadow color.
-    this.bitmap.context.fillStyle = 'rgb(15, 15, 15)';
+    this.bitmap.context.fillStyle = 'rgb(0, 0, 0)';
     this.bitmap.context.fillRect(0, 0,
             this.game.world.bounds.width, this.game.world.bounds.height);
 
@@ -320,14 +318,14 @@ LevelOne.prototype.updateVision = function() {
     // Cast rays at intervals in a large circle around the light.
     // Save all of the intersection points up to the sight radius
     var points = [this.player];
-    for(var a = this.player.rotation - Math.PI/BasicGame.playerLight;
-            a < this.player.rotation + Math.PI/BasicGame.playerLight;
+    for(var a = this.player.rotation - LIGHT_RADS/2;
+            a < this.player.rotation + LIGHT_RADS/2;
             a += Math.PI/180) {
         // Create a ray from the player to a point on the circle
         var ray = new Phaser.Line(
             this.player.x, this.player.y,
-            this.player.x + Math.cos(a) * SIGHT_RADIUS,
-            this.player.y + Math.sin(a) * SIGHT_RADIUS);
+            this.player.x + Math.cos(a) * LIGHT_DEPTH,
+            this.player.y + Math.sin(a) * LIGHT_DEPTH);
 
         // Returns sight radius along the ray, or end of the sight radius
         points.push(this.getEndPoint(ray));
@@ -335,8 +333,8 @@ LevelOne.prototype.updateVision = function() {
 
     // Use light to dark gradient
     var gradient = this.bitmap.context.createRadialGradient(
-        points[0].x, points[0].y, SIGHT_RADIUS * 0.2,
-        points[0].x, points[0].y, SIGHT_RADIUS);
+        points[0].x, points[0].y, LIGHT_DEPTH * 0.2,
+        points[0].x, points[0].y, LIGHT_DEPTH);
     gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
     gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
 
@@ -358,15 +356,15 @@ LevelOne.prototype.updateVision = function() {
 };
 
 LevelOne.prototype.nearbyTiles = function(object) {
-    return this.layer.getTiles(object.x-SIGHT_RADIUS, object.y-SIGHT_RADIUS,
-                               2*SIGHT_RADIUS, 2*SIGHT_RADIUS, true);
+    return this.layer.getTiles(object.x-LIGHT_DEPTH, object.y-LIGHT_DEPTH,
+                               2*LIGHT_DEPTH, 2*LIGHT_DEPTH, true);
 };
 
 // Given a ray, this function iterates through all of the walls and
 // returns the closest wall intersection from the start of the ray
 // or null if the ray does not intersect any walls.
 LevelOne.prototype.getEndPoint = function(ray) {
-    var distanceToWall = SIGHT_RADIUS;
+    var distanceToWall = LIGHT_DEPTH;
     var closestIntersection = ray.end;
 
     // For each of the walls...
@@ -399,7 +397,11 @@ LevelOne.prototype.getEndPoint = function(ray) {
         }
     }, this);
 
-    return closestIntersection;
+    // intersection vector; penetrate light a few pixels into the walls
+    var u = Phaser.Point.subtract(closestIntersection, ray.start);
+    u.setMagnitude(u.getMagnitude() + LIGHT_PEN);
+    return Phaser.Point.add(ray.start, u);
+    //return closestIntersection;
 };
 
     return LevelOne;
