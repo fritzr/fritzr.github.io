@@ -163,12 +163,13 @@ var BasicGame;
             this.player.body.y = 100;
           }
           
-          if(this.player.x >= 960){
+          if(this.player.x >= 930){
           	var currentTime = this.game.time.now;
           	score = 1000 + (enemiesKilled*500) - (currentTime - startTime)/100000;
       		  BasicGame.currency += score/1000;
             this.wonGame = true;
-            this.game.state.start('levelWon');
+            BasicGame.level += 1;
+            this.game.state.start('LevelWon');
           }
          
           this.player.rotation = this.game.physics.arcade.accelerateToPointer( this.player, this.game.input.activePointer, 200, 100, 100 );
@@ -247,6 +248,7 @@ var BasicGame;
       bullet.kill();
       player.kill();
       player.alive = false;
+      BasicGame.level += 1;
       this.game.state.start('LevelLost');
     };
 
