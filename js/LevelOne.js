@@ -314,6 +314,10 @@ LevelOne.prototype.updateVision = function() {
     this.bitmap.context.fillRect(0, 0,
             this.game.world.bounds.width, this.game.world.bounds.height);
 
+    // don't draw flashlight if player is dead!
+    if(!this.player.alive)
+        return;
+
     // Ray casting!
     // Cast rays at intervals in a large circle around the light.
     // Save all of the intersection points up to the sight radius
