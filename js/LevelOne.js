@@ -314,8 +314,8 @@ LevelOne.prototype.updateVision = function() {
     // Cast rays at intervals in a large circle around the light.
     // Save all of the intersection points up to the sight radius
     var points = [this.player];
-    for(var a = this.player.rotation;
-            a < this.player.rotation + Math.PI / 3;
+    for(var a = this.player.rotation - Math.PI /BasicGame.playerLight;
+            a < this.player.rotation + Math.PI/BasicGame.playerLight;
             a += Math.PI/180) {
         // Create a ray from the player to a point on the circle
         var ray = new Phaser.Line(

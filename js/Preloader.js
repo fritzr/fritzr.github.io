@@ -52,6 +52,7 @@ var BasicGame;
         BasicGame.FireRateUpgrade1 = 0;
         BasicGame.FireRateUpgrade2 = 0;
         BasicGame.FireRateUpgrade3 = 0;
+        BasicGame.playerLight = 8;
         
         this.load.spritesheet("continue_button", "assets/img/Buttons/Continue.png", 200, 50);
         this.load.spritesheet("controls_button", "assets/img/Buttons/Controls.png", 200, 50);
