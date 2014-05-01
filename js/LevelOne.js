@@ -32,7 +32,7 @@ var BasicGame;
           [975,665], [365,80],  [190,432], [420,958],
           [670,890], [465,960]
       ];
-    var wonGame = false;
+    var wonGame;
   enemy = function (game, index1,index2, player, bullets) {
    
     var x = [250, 715, 780, 625, 975, 365, 190, 420, 670, 465];
@@ -137,7 +137,7 @@ var BasicGame;
           stateText.visible = false;
           stateText.fixedToCamera = true;
           
-          button = this.game.add.button(this.game.centerX, this.game.centerY, 'continue_button', this.endLevel, this, 2, 1, 0);
+          button = this.game.add.button(412, 213, 'continue_button', this.endLevel, this, 2, 1, 0);
           button.anchor.setTo(0.5,0.5);
           button.fixedToCamera = true;
           button.visible = false;
@@ -250,7 +250,6 @@ var BasicGame;
     };
     
     LevelOne.prototype.endLevel = function(){
-      console.log(this.wonGame);
       if(!this.wonGame){
         this.restart();
       }else this.finished();
