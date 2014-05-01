@@ -289,7 +289,7 @@ var BasicGame;
     }
 
 // how far can you see
-var SIGHT_RADIUS = 200;
+var SIGHT_RADIUS = 300;
 
 LevelOne.prototype.createLightBitmaps = function() {
     // Create a bitmap texture for drawing light cones
