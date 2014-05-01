@@ -43,11 +43,12 @@ var BasicGame;
         this.load.audio('pew4', 'assets/sound/pew4.ogg');
         this.load.audio('explosion', 'assets/sound/explosion.ogg');
         this.load.spritesheet('explode','assets/img/explosion.png', 64, 64);
-        //this.load.spritesheet('upgradeButton', 'assets/img/Buttons/UpgradeButton.png',85,75);
+        this.load.spritesheet('upgradeButton', 'assets/img/Buttons/upgradeButton.png',80,60);
         
         //global variables
         BasicGame.currency = 0;
         BasicGame.level = 1;
+        BasicGame.playerFireRate = 200;
         
         this.load.spritesheet("continue_button", "assets/img/Buttons/Continue.png", 200, 50);
         this.load.spritesheet("controls_button", "assets/img/Buttons/Controls.png", 200, 50);
