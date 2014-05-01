@@ -22,7 +22,6 @@ var BasicGame;
       
       stateText = this.game.add.text(150,100,'Level ' + BasicGame.level + ' Complete!\nTotal Score: ' + BasicGame.currency, { fontSize: '84px', fill: '#000000' });
       stateText.anchor.setTo(0.5, 0.5);
-      stateText.visible = false;
       stateText.fixedToCamera = true;
     };
 
