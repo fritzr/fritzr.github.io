@@ -19,7 +19,7 @@ var BasicGame;
         // show preload assets
         this.background = this.add.image(0, 0, "load_bg");
         this.preloadBar = this.add.sprite(this.game.width/2,
-        (this.game.height/2) + 200, "load_bar");
+        (this.game.height/2) + 150, "load_bar");
         this.preloadBar.anchor.setTo(0.5, 0.5);
         this.load.setPreloadSprite(this.preloadBar);
 
@@ -53,6 +53,10 @@ var BasicGame;
         BasicGame.FireRateUpgrade2 = 0;
         BasicGame.FireRateUpgrade3 = 0;
         BasicGame.playerLight = 8;
+        BasicGame.LightUpgrade1 = 0;
+        BasicGame.LightUpgrade2 = 0;
+        BasicGame.LightUpgrade3 = 0;
+        
         
         this.load.spritesheet("continue_button", "assets/img/Buttons/Continue.png", 200, 50);
         this.load.spritesheet("controls_button", "assets/img/Buttons/Controls.png", 200, 50);

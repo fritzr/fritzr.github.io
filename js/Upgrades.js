@@ -61,7 +61,7 @@ var BasicGame;
     
     Upgrades.prototype.FirstLight = function(){
     	if(BasicGame.currency >= 2000){
-    		BasicGame.playerLight = 16;
+    		BasicGame.playerLight = 4;
     		this.lrButton1.frame = 1;
     		BasicGame.LightUpgrade1 = 1;
     	}
@@ -69,7 +69,7 @@ var BasicGame;
     
     Upgrades.prototype.SecondLight = function(){
     	if(BasicGame.currency >= 5000){
-    		BasicGame.playerLight = 25;
+    		BasicGame.playerLight = 2;
     		this.lrButton2.frame = 1;
     		BasicGame.LightUpgrade2 = 1;
     	}
@@ -77,7 +77,7 @@ var BasicGame;
     
     Upgrades.prototype.ThirdLight = function(){
     	if(BasicGame.currency >= 10000){
-    		BasicGame.playerLight = 32;
+    		BasicGame.playerLight = 0;
     		this.lrButton3.frame = 1;
     		BasicGame.LightUpgrade3 = 1;
     	}
