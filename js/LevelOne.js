@@ -256,6 +256,7 @@ var BasicGame;
       bullet.kill();
       player.kill();
       player.alive = false;
+      BasicGame.playerLight = 180;
       
       stateText.setText("You Have Failed!\n Click to restart");
       button.visible = true;
@@ -314,7 +315,7 @@ LevelOne.prototype.updateVision = function() {
     // Cast rays at intervals in a large circle around the light.
     // Save all of the intersection points up to the sight radius
     var points = [this.player];
-    for(var a = this.player.rotation - Math.PI /BasicGame.playerLight;
+    for(var a = this.player.rotation - Math.PI/BasicGame.playerLight;
             a < this.player.rotation + Math.PI/BasicGame.playerLight;
             a += Math.PI/180) {
         // Create a ray from the player to a point on the circle
@@ -329,7 +330,7 @@ LevelOne.prototype.updateVision = function() {
 
     // Use light to dark gradient
     var gradient = this.bitmap.context.createRadialGradient(
-        points[0].x, points[0].y, SIGHT_RADIUS * 0.6,
+        points[0].x, points[0].y, SIGHT_RADIUS * 0.2,
         points[0].x, points[0].y, SIGHT_RADIUS);
     gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
     gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
