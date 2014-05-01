@@ -45,7 +45,7 @@ var BasicGame;
 		this.lrButton3.frame = BasicGame.LightUpgrade3;
 		var lr11Label = this.add.text(400, 400, 'x1.5 Range \nCost: 2,000', style2);
 		var lr2Label = this.add.text(600, 400, 'x2 Range \nCost: 5,000', style2);
-		var lr3Label = this.add.text(800, 400, 'x2.5 Fire Rate \nCost: 10,000', style2);
+		var lr3Label = this.add.text(800, 400, 'x2.5 Range \nCost: 10,000', style2);
 		
 		var fr1Label = this.add.text(400, 275, 'x2 Fire Rate \nCost: 2,000', style2);
 		var fr2Label = this.add.text(600, 275, 'x4 Fire Rate \nCost: 10,000', style2);
