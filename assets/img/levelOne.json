@@ -20,11 +20,15 @@
  "tilesets":[
         {
          "firstgid":1,
+<<<<<<< HEAD
          "image":"..\/..\/..\/..\/..\/Desktop\/space maze 2014\/assets\/img\/tiles\/LevelOne.png",
+=======
+         "image":"..\/tiles\/levelOne.png",
+>>>>>>> 40a31d528f2782d4f14fbed74017caa97d41d614
          "imageheight":512,
          "imagewidth":512,
          "margin":0,
-         "name":"LevelOne",
+         "name":"levelOne",
          "properties":
             {
 
