@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="29" height="32" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="LevelOne" tilewidth="32" tileheight="32">
+  <image source="../../../../../../Desktop/space maze 2014/assets/img/tiles/LevelOne.png" width="512" height="512"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="29" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztlckNACAIBC3S/mvx7RFwFzRG2MSHBwxqgFp61UtjZKLzcU1SMmWbHR/S31mZml5m7ryNJQ+s92L2IzHR/5N8etQ+LW7GPjLTu+9ozFVcyfRhnmKczE9N0ZlorWTOW+NG9pM5n2F7IVOHUDF95Wfm7dEAnDtbjQ==
+  </data>
+ </layer>
+</map>
