@@ -22,7 +22,7 @@ var BasicGame;
         background.scale.setTo(0.65, 0.75);
         //this.music = this.add.audio('music_title');
         //this.music.play();
-      	this.backButton = this.add.button(700, 0, 'continue_button', this.backToMenu, this, 1,0,1);
+      	this.backButton = this.add.button(700, 0, 'continue_button', this.toLevel, this, 1,0,1);
         //this.upgradesbutton = this.add.button(300,300, 'upgrades_button', this.actionOnClick, this, 1,0,1);
         var i = 0;
         var text = "Upgrades";
@@ -116,6 +116,14 @@ var BasicGame;
     }
 
     Upgrades.prototype.startGame = function () {
+    };
+    
+    MainMenu.prototype.toLevel = function(){
+      this.music.stop();
+      if(BasicGame.level == 1)
+        this.game.state.start('LevelOne');
+      if(BasicGame.level == 2)
+        this.game.state.start('LevelTwo');
     };
     
     Upgrades.prototype.backToMenu = function () {

@@ -158,14 +158,14 @@ var BasicGame;
             this.player.body.x = 75;
             this.player.body.y = 100;
           }
-          
-          if(this.player.y >= 1536){
+          console.log(this.player.y);
+          if(this.player.y >= 1565){
           	var currentTime = this.game.time.now;
           	score = Math.round(20 + (enemiesKilled*50) - (currentTime - startTime)/10000000);
       		  BasicGame.currency += score/10;
             this.wonGame = true;
             
-            this.game.state.start('levelWon');
+            this.game.state.start('LevelWon');
           }
          
           this.player.rotation = this.game.physics.arcade.accelerateToPointer( this.player, this.game.input.activePointer, 200, 100, 100 );
