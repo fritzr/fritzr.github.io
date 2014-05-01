@@ -10,9 +10,9 @@ var BasicGame;
 (function (BasicGame) {
   	
 
-  var LevelOne = (function (_super) {
-    __extends(LevelOne, _super);
-    function LevelOne() {
+  var LevelTwo = (function (_super) {
+    __extends(LevelTwo, _super);
+    function LevelTwo() {
       _super.apply(this, arguments);
     }
     
@@ -94,7 +94,7 @@ var BasicGame;
 
     
     
-    LevelOne.prototype.create = function () 
+    LevelTwo.prototype.create = function () 
     {
 		      this.game.physics.startSystem(Phaser.Physics.ARCADE);
           this.game.stage.backgroundColor = '#000000';
@@ -154,7 +154,7 @@ var BasicGame;
           wonGame = false;
     };
 
-    LevelOne.prototype.update = function()
+    LevelTwo.prototype.update = function()
     {
       // draw field of vision
       this.updateVision();
@@ -196,12 +196,12 @@ var BasicGame;
           this.game.physics.arcade.overlap(bullets, this.layer, this.bulletHitLayer, null, this.layer); 
     };
 
-    LevelOne.prototype.collider = function ()
+    LevelTwo.prototype.collider = function ()
     {
       this.game.physics.arcade.collide(this.player, this.layer);
     };
 
-    LevelOne.prototype.fireBullet = function ()
+    LevelTwo.prototype.fireBullet = function ()
     {
       if (this.game.time.now > bulletTime && this.player.alive){
         this.bullet = bullets.getFirstExists(false);
@@ -217,7 +217,7 @@ var BasicGame;
       }
     };
 
-    LevelOne.prototype.bulletHitEnemy = function (bullet,ship)
+    LevelTwo.prototype.bulletHitEnemy = function (bullet,ship)
     {
         this.explosion = this.game.add.audio('explosion');
         this.explosion = this.game.add.audio('explosion');
@@ -233,12 +233,12 @@ var BasicGame;
         ship.alive = false;
     };
 
-    LevelOne.prototype.bulletHitLayer = function (bullet,Layer)
+    LevelTwo.prototype.bulletHitLayer = function (bullet,Layer)
     {
       bullet.kill();
     };
     
-    LevelOne.prototype.bulletHitPlayer = function (bullet,player)
+    LevelTwo.prototype.bulletHitPlayer = function (bullet,player)
     {
       this.explosion = this.game.add.audio('explosion');
       this.explosion.play();
@@ -259,25 +259,25 @@ var BasicGame;
       button.visible = true;
     };
 
-    LevelOne.prototype.resetBullet = function (bullet)
+    LevelTwo.prototype.resetBullet = function (bullet)
     {
         bullet.kill();
     };
     
-    LevelOne.prototype.endLevel = function(){
+    LevelTwo.prototype.endLevel = function(){
     BasicGame.playerLight = lightVal;
       if(!this.wonGame){
         this.restart();
       }else this.finished();
     }
     
-    LevelOne.prototype.restart = function ()
+    LevelTwo.prototype.restart = function ()
     {
       //this.game.world.removeAll();
     	this.game.state.start("LevelWon");
     };
     
-    LevelOne.prototype.finished = function (){
+    LevelTwo.prototype.finished = function (){
       BasicGame.level += 1;
       this.game.state.start("LevelWon");
     }
@@ -285,7 +285,7 @@ var BasicGame;
 // how far can you see
 var SIGHT_RADIUS = 200;
 
-LevelOne.prototype.createLightBitmaps = function() {
+LevelTwo.prototype.createLightBitmaps = function() {
     // Create a bitmap texture for drawing light cones
     this.bitmap = this.game.add.bitmapData(this.game.world.bounds.width,
                                            this.game.world.bounds.height);
@@ -304,7 +304,7 @@ LevelOne.prototype.createLightBitmaps = function() {
 }
 
 // The update() method is called every frame
-LevelOne.prototype.updateVision = function() {
+LevelTwo.prototype.updateVision = function() {
     // Fill the entire light bitmap with a dark shadow color.
     this.bitmap.context.fillStyle = 'rgb(15, 15, 15)';
     this.bitmap.context.fillRect(0, 0,
@@ -351,7 +351,7 @@ LevelOne.prototype.updateVision = function() {
     this.bitmap.dirty = true;
 };
 
-LevelOne.prototype.nearbyTiles = function(object) {
+LevelTwo.prototype.nearbyTiles = function(object) {
     return this.layer.getTiles(object.x-SIGHT_RADIUS, object.y-SIGHT_RADIUS,
                                2*SIGHT_RADIUS, 2*SIGHT_RADIUS, true);
 };
@@ -359,7 +359,7 @@ LevelOne.prototype.nearbyTiles = function(object) {
 // Given a ray, this function iterates through all of the walls and
 // returns the closest wall intersection from the start of the ray
 // or null if the ray does not intersect any walls.
-LevelOne.prototype.getEndPoint = function(ray) {
+LevelTwo.prototype.getEndPoint = function(ray) {
     var distanceToWall = SIGHT_RADIUS;
     var closestIntersection = ray.end;
 
@@ -396,9 +396,9 @@ LevelOne.prototype.getEndPoint = function(ray) {
     return closestIntersection;
 };
 
-    return LevelOne;
+    return LevelTwo;
   })(Phaser.State);
-  BasicGame.LevelOne = LevelOne;
+  BasicGame.LevelTwo = LevelTwo;
 
 
 
