@@ -118,7 +118,7 @@ var BasicGame;
     Upgrades.prototype.startGame = function () {
     };
     
-    MainMenu.prototype.toLevel = function(){
+    Upgrades.prototype.toLevel = function(){
       this.music.stop();
       if(BasicGame.level == 1)
         this.game.state.start('LevelOne');
