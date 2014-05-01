@@ -163,27 +163,21 @@ var BasicGame;
     {
       // draw field of vision
       this.updateVision();
-      
-      if(this.player.x > 960 && this.player.y > 960){
-      	
-        this.stateText.content = " You Have Won! Click to restart \n XP: " + score;
-        this.stateText.visible = true;
-        this.game.input.onTap.addOnce(restart,this);
-          }
 
           if(this.player.body.blocked.left && this.player.body.blocked.right){
-            this.player.body.x = 3;
-            this.player.body.y = 180;
+            this.player.body.x = 75;
+            this.player.body.y = 100;
           }
           
-          if(this.player.x >= 930){
+          if(this.player.x >= 960){
           	var currentTime = this.game.time.now;
           	score = 1000 + (enemiesKilled*500) - (currentTime - startTime)/100000;
-      		BasicGame.currency += score/1000;
+      		  BasicGame.currency += score/1000;
             stateText.setText("You Have Won!\n XP: " + score);
             stateText.visible = true;
             button.visible = true;
             this.wonGame = true;
+            this.game.state.start('LevelWon');
           }
          
           this.player.rotation = this.game.physics.arcade.accelerateToPointer( this.player, this.game.input.activePointer, 200, 100, 100 );
@@ -280,13 +274,13 @@ var BasicGame;
     
     LevelOne.prototype.restart = function ()
     {
-      this.game.world.removeAll();
-    	this.game.state.start("LevelOne");
+      //this.game.world.removeAll();
+    	this.game.state.start("LevelWon");
     };
     
     LevelOne.prototype.finished = function (){
       BasicGame.level += 1;
-      this.game.state.start("Upgrades");
+      this.game.state.start("LevelWon");
     }
 
 LevelOne.prototype.createLightBitmaps = function() {
