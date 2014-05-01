@@ -164,8 +164,8 @@ var BasicGame;
           
           if(this.player.x >= 930){
           	var currentTime = this.game.time.now;
-          	score = (enemiesKilled*500) - (currentTime - startTime)/100000;
-      		BasicGame.currency += score;
+          	score = 1000 + (enemiesKilled*500) - (currentTime - startTime)/100000;
+      		BasicGame.currency += score/1000;
             stateText.setText("You Have Won!\n XP: " + score);
             stateText.visible = true;
             button.visible = true;

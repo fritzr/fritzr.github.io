@@ -27,20 +27,20 @@ var BasicGame;
     	var style = { font: "30px Arial", fill: "#FCFF00", align: "center" };
     	var style2 = { font: "15px Arial", fill: "#FCFF00", align: "center" };
 		var fireRate = "Increased Fire Rate:";
-		var frLabel = this.add.text(50, this.world.centerY - 100, fireRate, style);
-		var currencyLbl = this.add.text(800, 500, 'Total XP: ' + BasicGame.currency, style);
+		var frLabel = this.add.text(50, 200, fireRate, style);
+		var currencyLbl = this.add.text(750, 500, 'Total XP: ' + BasicGame.currency, style);
 		
-		this.fr1Button = this.add.button(400, this.world.centerY - 100, 'upgradeButton', this.FirstUpgrade, this);
+		this.fr1Button = this.add.button(400, 200, 'upgradeButton', this.FirstUpgrade, this);
 		this.fr1Button.frame = BasicGame.FireRateUpgrade1;
-		this.fr2Button = this.add.button(600, this.world.centerY - 100, 'upgradeButton', this.SecondUpgrade, this);
+		this.fr2Button = this.add.button(600, 200, 'upgradeButton', this.SecondUpgrade, this);
 		this.fr2Button.frame = BasicGame.FireRateUpgrade2;
-		this.fr3Button = this.add.button(800, this.world.centerY - 100, 'upgradeButton', this.ThirdUpgrade, this);
+		this.fr3Button = this.add.button(800, 200, 'upgradeButton', this.ThirdUpgrade, this);
 		this.fr3Button.frame = BasicGame.FireRateUpgrade3;
 		
-		var fr1Label = this.add.text(400, this.world.centerY - 30, 'x2 Fire Rate \nCost: 2,000', style2);
-		var fr2Label = this.add.text(600, this.world.centerY - 30, 'x4 Fire Rate \nCost: 10,000', style2);
-		var fr3Label = this.add.text(800, this.world.centerY - 30, 'Infinite Fire Rate \nCost: 50,000', style2);		
-		var LightLabel = this.add.text(50, this.world.centerY + 50, "Light Distance:", style);
+		var fr1Label = this.add.text(400, 275, 'x2 Fire Rate \nCost: 2,000', style2);
+		var fr2Label = this.add.text(600, 275, 'x4 Fire Rate \nCost: 10,000', style2);
+		var fr3Label = this.add.text(800, 275, 'Infinite Fire Rate \nCost: 50,000', style2);		
+		var LightLabel = this.add.text(50, 400, "Light Distance:", style);
     	var t = this.add.text(this.world.centerX-300, 0, text, style);
     	
     };
