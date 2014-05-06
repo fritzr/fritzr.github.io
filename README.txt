@@ -26,16 +26,4 @@ Upgrades include increase fire rate, and increase angle of vision.
 
 Credits:
 
-The explosion spritesheet:
-http://thundernoodle.net/notblog/2011/10/17/how-to-animate-a-sprite-using-a-sprite-sheet-in-xna/
-
-
-
-LevelOne spritesheet:
-http://rpgconspiracy.files.wordpress.com/2011/06/steampunkish-tilee.png
-
-LevelTwo spritesheet:
-http://s63.photobucket.com/user/busbuzz/media/TileD-2.png.html
-
-Sound:
-The Quarantine Zone (20 Years Later)
+≈
