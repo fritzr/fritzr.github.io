@@ -15,15 +15,21 @@ var BasicGame;
     }
     
     Boot.prototype.preload = function () {
+      //load preloader assets
       this.load.image("load_bg", "assets/img/LoaderBackground.jpg");
       this.load.image("load_bar", "assets/img/LoaderBar.jpg");
     };
     
     Boot.prototype.create = function () {
-        console.log('Booting...');
+      //announce botting status
+      console.log('Booting...');
+      
+      //set some game settings
       this.game.input.maxPointers = 1;
       this.game.stage.disableVisibilityChange = true;
       BasicGame.playerFireRate = 200;
+      
+      //start Preloader
       this.game.state.start("Preloader");
     };
     
