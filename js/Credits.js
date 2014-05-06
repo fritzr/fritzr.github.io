@@ -15,23 +15,22 @@ var BasicGame;
     }
 
     Credits.prototype.create = function () {
-        console.log('Credits');
-        var background = this.add.image(0,0, 'menu_bg');
-        background.scale.setTo(0.65, 0.75);
-      	this.backButton = this.add.button(50, 50, 'credits_button', this.backToMenu, this, 1,0,1);
-        var i = 0;
-        var text = "Credits:\nDamian O'Leary\nDrew Schilthelm\nFritz Reese\nWes Chappell";
+      //announce credits page
+      console.log('Credits');
+      
+      //set and display credits page assets
+      var background = this.add.image(0,0, 'menu_bg');
+      background.scale.setTo(0.65, 0.75);
+    	this.backButton = this.add.button(50, 50, 'credits_button', this.backToMenu, this, 1,0,1);
+      var i = 0;
+      var text = "Credits:\nDamian O'Leary\nDrew Schilthelm\nFritz Reese\nWes Chappell";
     	var style = { font: "65px Helvetica Neue UltraLight", fill: "#FCFF00", align: "center" };
-
     	var t = this.add.text(this.world.centerX, this.world.centerY-100, text, style);
     	
     };
-
-    Credits.prototype.update = function() {
-
-    };
     
     Credits.prototype.backToMenu = function () {
+      //go back to main menu if selected
     	this.game.state.start("MainMenu");
     }
 
