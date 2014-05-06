@@ -15,11 +15,15 @@ var BasicGame;
     }
 
     LevelWon.prototype.create = function () {
-        console.log('LevelWon');
-        background = this.add.image(0,0, 'upgrade_background');
-        background.scale.setTo(0.65, 0.75);
-      	this.continuebutton = this.add.button(700, 0, 'continue_button', this.toUpgrades, this, 1,0,1);
+      //announce level won
+      console.log('LevelWon');
       
+      //set and display assets
+      background = this.add.image(0,0, 'upgrade_background');
+      background.scale.setTo(0.65, 0.75);
+      this.continuebutton = this.add.button(700, 0, 'continue_button', this.toUpgrades, this, 1,0,1);
+      
+      //set and display win text
       stateText = this.add.text(512,288,'Level ' + BasicGame.level + ' Complete!\nTotal Score: ' + BasicGame.currency, { fontSize: '84px', fill: '#FFFFFF' });
       stateText.anchor.setTo(0.5, 0.5);
       stateText.visible = true;
@@ -27,6 +31,7 @@ var BasicGame;
     };
 
     LevelWon.prototype.toUpgrades = function () {
+      //Go to upgrades screen (only option)
       this.game.state.start('Upgrades');
     };
 
