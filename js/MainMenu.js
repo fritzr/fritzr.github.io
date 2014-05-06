@@ -15,23 +15,23 @@ var BasicGame;
     }
 
     MainMenu.prototype.create = function () {
-        console.log('Main menu');
-        this.music = this.add.audio('music_title');
-        this.music.play();
-        this.background = this.add.image(0,0, 'menu_bg');
-        this.continuebutton = this.add.button(100,100, 'continue_button', this.ContinueGame, this, 1,0,1);
-        this.controlsbutton = this.add.button(100,155, 'controls_button', this.startControls, this, 1,0,1);
-        this.creditsbutton = this.add.button(100,210, 'credits_button', this.startCredits, this, 1,0,1);
-        this.newgamebutton = this.add.button(100,265, 'newgame_button', this.startGame, this, 1,0,1);
-        this.upgradesbutton = this.add.button(100,320, 'upgrades_button', this.startUpgrade, this, 1,0,1);
-        var i = 0;
-    };
-
-    MainMenu.prototype.update = function() {
-
+      //announce main menu
+      console.log('Main menu');
+      
+      //set and display main menu assets
+      this.music = this.add.audio('music_title');
+      this.music.play();
+      this.background = this.add.image(0,0, 'menu_bg');
+      this.continuebutton = this.add.button(100,100, 'continue_button', this.ContinueGame, this, 1,0,1);
+      this.controlsbutton = this.add.button(100,155, 'controls_button', this.startControls, this, 1,0,1);
+      this.creditsbutton = this.add.button(100,210, 'credits_button', this.startCredits, this, 1,0,1);
+      this.newgamebutton = this.add.button(100,265, 'newgame_button', this.startGame, this, 1,0,1);
+      this.upgradesbutton = this.add.button(100,320, 'upgrades_button', this.startUpgrade, this, 1,0,1);
+      var i = 0;
     };
     
     MainMenu.prototype.ContinueGame = function(){
+      //stop music, load next level
       this.music.stop();
       if(BasicGame.level == 1)
         this.game.state.start('LevelOne');
@@ -40,37 +40,33 @@ var BasicGame;
     };
     
     MainMenu.prototype.startGame = function () {
+      //stop music, reset player data, start level one
       this.music.stop();
-        BasicGame.currency = 0;
-        BasicGame.level = 1;
-        BasicGame.playerFireRate = 200;
-        BasicGame.FireRateUpgrade1 = 0;
-        BasicGame.FireRateUpgrade2 = 0;
-        BasicGame.FireRateUpgrade3 = 0;
+      BasicGame.currency = 0;
+      BasicGame.level = 1;
+      BasicGame.playerFireRate = 200;
+      BasicGame.FireRateUpgrade1 = 0;
+      BasicGame.FireRateUpgrade2 = 0;
+      BasicGame.FireRateUpgrade3 = 0;
       this.game.state.start("LevelOne");
     };
     
     MainMenu.prototype.startUpgrade = function(){
+      //stop music start upgrades state
     	this.music.stop();
     	this.game.state.start("Upgrades");	
     };
     
     MainMenu.prototype.startControls = function(){
+      //stop music, start controls state
       this.music.stop();
       this.game.state.start('Controls');
     };
     
     MainMenu.prototype.startCredits = function(){
+      //stop music, start credits state
       this.music.stop();
       this.game.state.start('Credits');
-    };
-    
-    MainMenu.prototype.actionOnClick = function () {
-      //if(this.music.isPlaying){
-      //  this.music.stop();
-      //}else{
-      //  this.music.play();
-      //}
     };
         
     return MainMenu;
