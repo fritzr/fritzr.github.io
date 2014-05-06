@@ -15,12 +15,16 @@ var BasicGame;
     }
 
     LevelLost.prototype.create = function () {
-        console.log('LevelLost');
-        background = this.add.image(0,0, 'upgrade_background');
-        background.scale.setTo(0.65, 0.75);
-      	this.continuebutton = this.add.button(700, 50, 'continue_button', this.toMainMenu, this, 1,0,1);
-        this.restartbutton = this.add.button(700, 100, 'restart_button', this.toLevel, this, 1,0,1);
+      //announce level lost state
+      console.log('LevelLost');
       
+      //set and display losing assets
+      background = this.add.image(0,0, 'upgrade_background');
+      background.scale.setTo(0.65, 0.75);
+      this.continuebutton = this.add.button(700, 50, 'continue_button', this.toMainMenu, this, 1,0,1);
+      this.restartbutton = this.add.button(700, 100, 'restart_button', this.toLevel, this, 1,0,1);
+      
+      //set and diplay loss text
       stateText = this.add.text(512,288,'Level ' + BasicGame.level + ' Failed!', { fontSize: '84px', fill: '#FFFFFF' });
       stateText.anchor.setTo(0.5, 0.5);
       stateText.visible = true;
@@ -28,10 +32,12 @@ var BasicGame;
     };
 
     LevelLost.prototype.toMainMenu = function () {
+      //go back to main menu
       this.game.state.start('MainMenu');
     };
     
     LevelLost.prototype.toLevel = function () {
+      //restart current level
       if(BasicGame.level == 1){
         this.game.state.start('LevelOne');
       }
