@@ -1,6 +1,14 @@
 ﻿SPACEMAZE 2014: DELUXE
 COPYRIGHT 2014, TR STUDIOS, FAIRFAX, VA, USA
 
+Folders:
+.git contains github information
+assets contains sound, images and animations for the game, in subdirectories
+blogs contain developer blog html files
+contributionreviews contains the individual reports for contribution and group review
+js contains all javascript files
+promotionals contains the design document, video, and screenshots
+
 Structure of Code:
 Each screen is a separate gamestate, with global variables created for any information needed cross-states (ie. upgrades, current level, etc.)
 Each level is a separate gamestate, which then moves to other gamestates depending on win/loss
