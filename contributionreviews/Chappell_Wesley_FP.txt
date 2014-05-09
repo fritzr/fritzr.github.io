@@ -1,0 +1,33 @@
+Damian O’Leary
+What he did:
+Damian created prototype. 
+	He helped keep everyone organized on tasks, and helped convert the code to new Phaser version. 
+	He helped work on the ray casting.
+
+What he could have done:
+		He could have been a little clearer on some of the tasks that needed to be completed.
+
+
+Fritz Reese
+What he did:
+	Fritz did ray casting.
+What he could have done:
+	Fritz was busy with his senior project for another class, so he did not show up for a lot of group meetings, but he still did some significant work with the ray casting. 
+
+
+
+Drew Schilithem
+What he did:
+	He helped find some really good sprites for the tile maps. He added the alpha values to each of the sprites we used. He helped move some of the prototype code over to game states. He created the buttons, and added in the shop.
+What he could have done:
+	He could have helped to create more maps to play on, and helped update the code more.
+
+
+
+
+Wesley Chappell
+What I did:
+	I updated the prototype to states. I found the explosion sprites and added in the animations for them. I created the first level of the maze.
+
+What I could have done:
+	I could have helped work on the ray casting. I could have helped create more maps. I could have helped with the buttons.

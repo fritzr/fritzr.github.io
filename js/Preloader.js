@@ -51,7 +51,7 @@ var BasicGame;
       this.load.spritesheet('playership', 'assets/img/playership.png', 29, 27);
       this.load.spritesheet('enemyship', 'assets/img/enemyship.png', 27, 30);
       this.load.spritesheet('upgradeButton', 'assets/img/Buttons/upgradeButton.png',80,60);
-      this.load.spritesheet('explode','assets/img/explosion.png',50,50);
+      this.load.spritesheet('explode','assets/img/explosion.png',64,64);
       this.load.image('bullet', 'assets/img/bullet.png');
         
       //global variables
