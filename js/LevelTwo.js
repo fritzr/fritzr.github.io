@@ -37,9 +37,9 @@ var BasicGame;
     var LIGHT_RADS  = LIGHT_ANGLE*Math.PI/180; // angle in radians
 
     var LOCATIONS = [
-          [250,16],  [715,816], [780,656], [625,144],
-          [975,665], [365,80],  [190,432], [420,958],
-          [670,890], [465,960]
+          [336,80],  [144,720], [592,208], [336,720],
+          [976,336], [1360,464],  [80,848], [336,1232],
+          [624,1488], [976,1104], [1488,1232], [848,.848]
       ];
     var wonGame;
   enemy = function (game, index1,index2, player, bullets) {
